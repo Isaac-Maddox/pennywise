@@ -5,7 +5,7 @@
 
 import JSend from "./JSend";
 
-export async function GET(request: Request) {
+export async function GET() {
    return JSend.success({
       message: "Hello from the NextJS API"
    })

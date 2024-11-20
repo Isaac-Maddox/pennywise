@@ -1,5 +1,5 @@
 export default class JSend {
-   public static success<Data = any>(data: JSendSuccessData<Data> = null, status: number = 200) {
+   public static success(data: any = null, status: number = 200) {
       return Response.json({
          status: "success",
          data: data
@@ -8,7 +8,7 @@ export default class JSend {
       });
    }
 
-   public static fail<Data = any>(data: JSendFailData<Data>, status: number = 400) {
+   public static fail(data: any, status: number = 400) {
       return Response.json({
          status: 'fail',
          data: data
@@ -43,23 +43,4 @@ export default class JSend {
    }, {
       status: 403
    })
-}
-
-type JSendSuccessData<Data = any> = ({
-   [key: string]: Data
-} & {
-   pagination?: APIPagination
-}) | null
-
-type JSendFailData<Data = any> = {
-   message: string;
-} & {
-   [key: string]: Data;
-}
-
-type APIPagination = {
-   record_count: number;
-   page_count: number;
-   current_page: number;
-   more_pages: number;
 }

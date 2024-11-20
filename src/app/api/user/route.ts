@@ -1,9 +1,8 @@
 import { getUserbyToken } from "@/middleware_funcs";
 import JSend from "../JSend";
 import { cookies } from "next/headers";
-import { NextRequest } from "next/server";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
    const cookieStore = await cookies();
 
    if (!(await getUserbyToken(cookieStore.get("usrjwt")?.value))) {

@@ -1,6 +1,5 @@
 "use client";
 
-import JSend from "@/app/api/JSend";
 import { redirect } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
 
@@ -44,7 +43,7 @@ export default function LoginPage() {
    };
 
    return (
-      <form className="auth-form" onSubmit={(e) => submitForm(e)}>
+      <form className="auth-form" action="/api/login" method="post" onSubmit={(e) => submitForm(e)}>
          <h1>Log In</h1>
          <div className="form-control">
             <label htmlFor="email">Email</label>

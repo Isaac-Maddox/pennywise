@@ -29,18 +29,3 @@ export async function GET(req: NextRequest) {
       transactions
    })
 }
-
-export async function POST(req: NextRequest) {
-   const cookieStore = await cookies();
-   const jwt = cookieStore.get("usrjwt")?.value;
-
-   const user = await getUserbyToken(jwt);
-
-   if (!user) {
-      return JSend.Unauthenticated;
-   }
-}
-
-interface CreateTransactionRequestBody {
-
-}

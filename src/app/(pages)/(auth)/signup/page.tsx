@@ -12,7 +12,7 @@ const initialFormState: SignupFormState = {
 
 export default function SignupPage() {
    const [formState, setFormState] = useState<SignupFormState>(initialFormState);
-   const [error, setError] = useState("");
+   // const [error, setError] = useState("");
 
    const handleFormChange = (e: ChangeEvent<HTMLInputElement>) => {
       setFormState((old) => {
@@ -24,7 +24,7 @@ export default function SignupPage() {
    };
 
    return (
-      <form className="auth-form">
+      <form className="auth-form" action="/api/signup" method="post">
          <h1>Sign up</h1>
 
          <div className="form-control">

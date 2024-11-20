@@ -8,7 +8,7 @@ declare const globalThis: {
    prisma: ReturnType<typeof prismaSingleton>;
 } & typeof global;
 
-const prisma = globalThis.prisma ?? new PrismaClient();
+const prisma = globalThis.prisma ?? prismaSingleton();
 
 export default prisma;
 

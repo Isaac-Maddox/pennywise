@@ -23,6 +23,7 @@
     "eslint": "^8",
     "eslint-config-next": "15.0.3",
     "prisma": "^5.22.0",
+    "serve": "^14.2.4",
     "typescript": "^5"
   }
 }

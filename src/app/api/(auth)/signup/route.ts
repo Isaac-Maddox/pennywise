@@ -41,7 +41,8 @@ export async function POST(req: NextRequest) {
       });
    } catch (err) {
       return JSend.fail({
-         message: "This email is already in use"
+         message: "This email is already in use",
+         error: err
       }, 400);
    }
 }
