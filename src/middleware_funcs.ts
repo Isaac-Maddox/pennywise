@@ -3,9 +3,9 @@ import jwt from "jsonwebtoken";
 import prisma from "./db";
 import { User } from "@prisma/client";
 
-export const isLoggedIn = async (token: string | undefined): Promise<boolean> => {
+export const getUserbyToken = async (token: string | undefined): Promise<Omit<User, 'password' | 'salt'> | null> => {
    if (!token) {
-      return false;
+      return null;
    }
 
    const userJWT = jwt.decode(token) as Omit<User, "password" | "salt">;
@@ -13,22 +13,20 @@ export const isLoggedIn = async (token: string | undefined): Promise<boolean> =>
    console.log(userJWT);
 
    if (!userJWT) {
-      return false;
+      return null;
    }
 
    const data = await prisma.user.findUnique({ where: { id: userJWT.id }, select: { salt: true } });
 
-   console.log(data);
-
    if (!data) {
-      return false;
+      return null;
    }
 
    if (!jwt.verify(token, data.salt)) {
       const cookieStore = await cookies();
       cookieStore.delete("usrjwt");
-      return false;
+      return null;
    }
 
-   return true;
+   return userJWT;
 };
