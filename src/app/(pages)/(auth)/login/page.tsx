@@ -1,5 +1,6 @@
 "use client";
 
+import { login } from "@/actions/auth";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
@@ -16,23 +17,13 @@ export default function LoginPage() {
    const submitForm = async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      const response = await fetch("/api/login", {
-         method: "post",
-         body: JSON.stringify(formState),
-         credentials: "include",
-      });
-      const data = await response.json();
+      const { success, message } = await login(formState);
 
-      if (data.status === "success") {
-         return redirect("/app");
+      if (success) {
+         redirect("/app");
+      } else {
+         setError(message);
       }
-
-      if (data.status === "fail") {
-         setError(data.data.message);
-         return;
-      }
-
-      setError("We ran into trouble. Try again soon");
    };
 
    const updateFormState = (e: ChangeEvent<HTMLInputElement>) => {
