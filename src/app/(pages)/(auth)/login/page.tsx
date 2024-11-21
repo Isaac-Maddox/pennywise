@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
 
@@ -18,6 +19,7 @@ export default function LoginPage() {
       const response = await fetch("/api/login", {
          method: "post",
          body: JSON.stringify(formState),
+         credentials: "include",
       });
       const data = await response.json();
 
@@ -51,10 +53,18 @@ export default function LoginPage() {
          </div>
          <div className="form-control">
             <label htmlFor="password">Password</label>
-            <input type="password" name="password" id="password" value={formState.password} onChange={updateFormState} />
+            <input
+               type="password"
+               name="password"
+               id="password"
+               value={formState.password}
+               onChange={updateFormState}
+            />
          </div>
          {error && <p>{error}</p>}
          <button type="submit">Log in</button>
+         <hr />
+         <Link href="/signup">No account?</Link>
       </form>
    );
 }

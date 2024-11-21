@@ -29,15 +29,15 @@ export async function POST(req: NextRequest) {
 
    if (!user) {
       return JSend.fail({
-         message: "Invalid username or password"
-      })
+         message: "Invalid username or password",
+      });
    }
 
    const hashed = pbkdf2Sync(body.password, Buffer.from(user.salt, "hex"), 310000, 32, "sha256");
 
    if (hashed.toString("hex") !== user.password) {
       return JSend.fail({
-         message: "Invalid username or password"
+         message: "Invalid username or password",
       });
    }
 
@@ -52,8 +52,13 @@ export async function POST(req: NextRequest) {
       user.salt
    );
 
+   const d = new Date();
    const cookieStore = await cookies();
-   cookieStore.set("usrjwt", token);
+   cookieStore.set("usrjwt", token, {
+      secure: true,
+      httpOnly: true,
+      expires: d.setTime(d.getTime() + 60 * 60 * 24 * 7 * 1000),
+   });
 
    return JSend.success();
 }
