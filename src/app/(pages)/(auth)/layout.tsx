@@ -9,7 +9,6 @@ export default async function AuthLayout({ children }: { children: React.ReactNo
    console.log(token);
 
    if (await getUserbyToken(token)) {
-      console.log(await getUserbyToken(token));
       redirect("/app");
    }
 
