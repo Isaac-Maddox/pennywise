@@ -110,3 +110,29 @@ export async function logout(): Promise<never> {
 
    redirect("/login");
 }
+
+export const verifyToken = async (token: string | undefined): Promise<Omit<User, "password" | "salt"> | null> => {
+   if (!token) {
+      return null;
+   }
+
+   const userJWT = jwt.decode(token) as Omit<User, "password" | "salt">;
+
+   if (!userJWT) {
+      return null;
+   }
+
+   const data = await prisma.user.findUnique({ where: { id: userJWT.id }, select: { salt: true } });
+
+   if (!data) {
+      return null;
+   }
+
+   if (!jwt.verify(token, data.salt)) {
+      const cookieStore = await cookies();
+      cookieStore.delete("usrjwt");
+      return null;
+   }
+
+   return userJWT;
+};
