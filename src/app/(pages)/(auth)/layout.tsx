@@ -6,8 +6,6 @@ export default async function AuthLayout({ children }: { children: React.ReactNo
    const cookieStore = await cookies();
    const token = cookieStore.get("usrjwt")?.value;
 
-   console.log("User token: " + token);
-
    if (await getUserbyToken(token)) {
       redirect("/app");
    }
