@@ -1,4 +1,23 @@
 :root {
-  color-scheme: light dark;
-  --primary-color: light-dark(hsl(240, 75, 25), hsl(240, 50, 15));
+   color-scheme: light dark;
+
+   --primary: light-dark(hsl(240, 75%, 25%), hsl(240, 50%, 15%));
+
+   --bg-body: light-dark(hsl(0, 0%, 100%), hsl(240, 50%, 5%));
+   --bg-primary: var(--primary);
+   --bg-form-control: var(--bg-body);
+
+   --border-on-page: light-dark(hsl(240, 20%, 90%), hsl(240, 20%, 25%));
+   --border-form-control: var(--border-on-page);
+   --border-form-control-focus: light-dark(var(--primary), hsl(240, 100%, 75%));
+
+   --outline-form-control-focus: light-dark(hsla(240, 75%, 25%, 0.15), hsla(240, 100%, 75%, 0.25));
+
+   --text-heading: light-dark(hsl(240, 25%, 20%), hsl(240, 50%, 95%));
+   --text-body: light-dark(hsl(240, 20%, 30%), hsl(240, 20%, 80%));
+   --text-link: light-dark(hsl(240, 100%, 55%), hsl(240, 100%, 75%));
+   --text-dim: light-dark(hsl(240, 20%, 60%), hsl(240, 20%, 60%));
+
+   --text-heading-on-primary: hsl(0, 0%, 100%);
+   --text-body-on-primary: light-dark(hsl(240, 75%, 85%), hsl(240, 50%, 80%));
 }
