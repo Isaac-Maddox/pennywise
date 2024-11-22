@@ -13,7 +13,7 @@ export async function signup(
 ): Promise<ActionResponse<null>> {
    const missing = (["email", "password", "firstName", "lastName"] as const).filter((field) => !data[field]);
 
-   if (!!missing.length) {
+   if (missing.length) {
       return {
          success: false,
          message: `Missing required fields: ${missing.join(", ")}`,
@@ -49,7 +49,7 @@ export async function signup(
 export async function login(data: { email: string; password: string }): Promise<ActionResponse<Partial<User>>> {
    const missing = (["email", "password"] as const).filter((field) => !data[field]);
 
-   if (!!missing.length) {
+   if (missing.length) {
       return {
          success: false,
          message: `Missing required fields: ${missing.join(", ")}`,
@@ -116,7 +116,7 @@ export const verifyToken = async (token: string | undefined): Promise<Omit<User,
       return null;
    }
 
-   const userJWT = jwt.decode(token) as Omit<User, "password" | "salt">;
+   const userJWT = jwt.decode(token) as Omit<User, "password" | "salt"> | null;
 
    if (!userJWT) {
       return null;
