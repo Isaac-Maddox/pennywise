@@ -6,6 +6,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
    const cookieStore = await cookies();
    const token = cookieStore.get("usrjwt")?.value;
    const user = await verifyToken(token);
+   console.log(token);
 
    if (!user) {
       redirect("/login");
