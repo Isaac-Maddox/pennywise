@@ -1,5 +1,7 @@
 # Pennywise
 
+![Pennywise Logo](/public/logo_with_lettermark.jpg)
+
 ## Get set up
 
 ```bash
