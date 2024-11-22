@@ -1,0 +1,4 @@
+:root {
+  color-scheme: light dark;
+  --primary-color: light-dark(hsl(240, 75, 25), hsl(240, 50, 15));
+}

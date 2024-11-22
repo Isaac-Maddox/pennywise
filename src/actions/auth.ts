@@ -9,130 +9,137 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 export async function signup(
-   data: Pick<User, "email" | "password" | "firstName" | "lastName">
+  data: Pick<User, "email" | "password" | "firstName" | "lastName">
 ): Promise<ActionResponse<null>> {
-   const missing = (["email", "password", "firstName", "lastName"] as const).filter((field) => !data[field]);
+  const missing = (["email", "password", "firstName", "lastName"] as const).filter(
+    (field) => !data[field]
+  );
 
-   if (missing.length) {
-      return {
-         success: false,
-         message: `Missing required fields: ${missing.join(", ")}`,
-      };
-   }
+  if (missing.length) {
+    return {
+      success: false,
+      message: `Missing required fields: ${missing.join(", ")}`,
+    };
+  }
 
-   const salt = randomBytes(16);
-   const hashedPassword = pbkdf2Sync(data.password, salt, 310000, 32, "sha256");
+  const salt = randomBytes(16);
+  const hashedPassword = pbkdf2Sync(data.password, salt, 310000, 32, "sha256");
 
-   try {
-      await prisma.user.create({
-         data: {
-            ...{ ...data, confirmPassword: undefined },
-            password: hashedPassword.toString("hex"),
-            salt: salt.toString("hex"),
-         },
-      });
+  try {
+    await prisma.user.create({
+      data: {
+        ...{ ...data, confirmPassword: undefined },
+        password: hashedPassword.toString("hex"),
+        salt: salt.toString("hex"),
+      },
+    });
 
-      return {
-         success: true,
-         data: null,
-      };
-   } catch (err) {
-      console.log(err);
+    return {
+      success: true,
+      data: null,
+    };
+  } catch (err) {
+    console.log(err);
 
-      return {
-         success: false,
-         message: "This email is already in use",
-      };
-   }
+    return {
+      success: false,
+      message: "This email is already in use",
+    };
+  }
 }
 
-export async function login(data: { email: string; password: string }): Promise<ActionResponse<Partial<User>>> {
-   const missing = (["email", "password"] as const).filter((field) => !data[field]);
+export async function login(data: {
+  email: string;
+  password: string;
+}): Promise<ActionResponse<Partial<User>>> {
+  const missing = (["email", "password"] as const).filter((field) => !data[field]);
 
-   if (missing.length) {
-      return {
-         success: false,
-         message: `Missing required fields: ${missing.join(", ")}`,
-      };
-   }
+  if (missing.length) {
+    return {
+      success: false,
+      message: `Missing required fields: ${missing.join(", ")}`,
+    };
+  }
 
-   const user = await prisma.user.findUnique({
-      where: { email: data.email },
-   });
+  const user = await prisma.user.findUnique({
+    where: { email: data.email },
+  });
 
-   if (!user) {
-      return {
-         success: false,
-         message: "Invalid username or password",
-      };
-   }
+  if (!user) {
+    return {
+      success: false,
+      message: "Invalid username or password",
+    };
+  }
 
-   const hashed = pbkdf2Sync(data.password, Buffer.from(user.salt, "hex"), 310000, 32, "sha256");
+  const hashed = pbkdf2Sync(data.password, Buffer.from(user.salt, "hex"), 310000, 32, "sha256");
 
-   if (hashed.toString("hex") !== user.password) {
-      return {
-         success: false,
-         message: "Invalid username or password",
-      };
-   }
+  if (hashed.toString("hex") !== user.password) {
+    return {
+      success: false,
+      message: "Invalid username or password",
+    };
+  }
 
-   const token = jwt.sign(
-      {
-         ...user,
-         password: undefined,
-         salt: undefined,
-         categories: undefined,
-         transactions: undefined,
-      },
-      user.salt
-   );
+  const token = jwt.sign(
+    {
+      ...user,
+      password: undefined,
+      salt: undefined,
+      categories: undefined,
+      transactions: undefined,
+    },
+    user.salt
+  );
 
-   const d = new Date();
-   const cookieStore = await cookies();
-   cookieStore.set("usrjwt", token, {
-      httpOnly: true,
-      expires: d.setTime(d.getTime() + 360 * 24 * 7 * 1000),
-   });
+  const d = new Date();
+  const cookieStore = await cookies();
+  cookieStore.set("usrjwt", token, {
+    httpOnly: true,
+    expires: d.setTime(d.getTime() + 360 * 24 * 7 * 1000),
+  });
 
-   return {
-      success: true,
-      data: {
-         ...user,
-         password: undefined,
-         salt: undefined,
-      },
-   };
+  return {
+    success: true,
+    data: {
+      ...user,
+      password: undefined,
+      salt: undefined,
+    },
+  };
 }
 
 export async function logout(): Promise<never> {
-   const cookieStore = await cookies();
-   cookieStore.delete("usrjwt");
+  const cookieStore = await cookies();
+  cookieStore.delete("usrjwt");
 
-   redirect("/login");
+  redirect("/login");
 }
 
-export const verifyToken = async (token: string | undefined): Promise<Omit<User, "password" | "salt"> | null> => {
-   if (!token) {
-      return null;
-   }
+export const verifyToken = async (
+  token: string | undefined
+): Promise<Omit<User, "password" | "salt"> | null> => {
+  if (!token) {
+    return null;
+  }
 
-   const userJWT = jwt.decode(token) as Omit<User, "password" | "salt"> | null;
+  const userJWT = jwt.decode(token) as Omit<User, "password" | "salt"> | null;
 
-   if (!userJWT) {
-      return null;
-   }
+  if (!userJWT) {
+    return null;
+  }
 
-   const data = await prisma.user.findUnique({ where: { id: userJWT.id }, select: { salt: true } });
+  const data = await prisma.user.findUnique({ where: { id: userJWT.id }, select: { salt: true } });
 
-   if (!data) {
-      return null;
-   }
+  if (!data) {
+    return null;
+  }
 
-   if (!jwt.verify(token, data.salt)) {
-      const cookieStore = await cookies();
-      cookieStore.delete("usrjwt");
-      return null;
-   }
+  if (!jwt.verify(token, data.salt)) {
+    const cookieStore = await cookies();
+    cookieStore.delete("usrjwt");
+    return null;
+  }
 
-   return userJWT;
+  return userJWT;
 };
