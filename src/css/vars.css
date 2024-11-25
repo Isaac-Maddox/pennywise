@@ -1,23 +1,74 @@
 :root {
-   color-scheme: light dark;
+   color-scheme: light;
 
-   --primary: light-dark(hsl(240, 75%, 25%), hsl(240, 50%, 15%));
+   --border-1: light-dark(hsl(240, 22%, 90%), #fff);
 
-   --bg-body: light-dark(hsl(0, 0%, 100%), hsl(240, 50%, 5%));
-   --bg-primary: var(--primary);
-   --bg-form-control: var(--bg-body);
+   --theme: hsl(240, 50%, 35%);
 
-   --border-on-page: light-dark(hsl(240, 20%, 90%), hsl(240, 20%, 25%));
-   --border-form-control: var(--border-on-page);
-   --border-form-control-focus: light-dark(var(--primary), hsl(240, 100%, 75%));
+   --focused-border: var(--theme);
+   --focused-outline: hsla(240, 50%, 35%, 15%);
+   --error-border: hsl(0, 85%, 35%);
+   --error-outline: hsla(0, 85%, 35%, 15%);
 
-   --outline-form-control-focus: light-dark(hsla(240, 75%, 25%, 0.15), hsla(240, 100%, 75%, 0.25));
+   --heading-text: light-dark(hsl(240, 25%, 20%), #fff);
+   --body-text: light-dark(hsl(240, 20%, 30%));
+   --label-text: light-dark(hsl(240, 20%, 60%));
+   --red-text: hsl(0, 85%, 35%);
+   --error-text: var(--red-text);
+   --link-text: var(--theme);
+   --heading-on-theme: hsl(0, 0%, 100%);
+   --text-on-theme: hsl(240, 74%, 85%);
 
-   --text-heading: light-dark(hsl(240, 25%, 20%), hsl(240, 50%, 95%));
-   --text-body: light-dark(hsl(240, 20%, 30%), hsl(240, 20%, 80%));
-   --text-link: light-dark(hsl(240, 100%, 55%), hsl(240, 100%, 75%));
-   --text-dim: light-dark(hsl(240, 20%, 60%), hsl(240, 20%, 60%));
+   --ff-heading: "Sora", serif;
+   --ff-body: "Onest", sans-serif;
 
-   --text-heading-on-primary: hsl(0, 0%, 100%);
-   --text-body-on-primary: light-dark(hsl(240, 75%, 85%), hsl(240, 50%, 80%));
+   --fs-h1: 3rem;
+   --fw-h1: 700;
+   --lh-h1: 1.2;
+   --ls-h1: -5%;
+
+   --fs-h2: 2.25rem;
+   --fw-h2: 600;
+   --lh-h2: 1.2;
+   --ls-h2: -5%;
+
+   --fs-h3: 1.75rem;
+   --fw-h3: 600;
+   --lh-h3: 1.2;
+   --ls-h3: -4%;
+
+   --fs-h4: 1.5rem;
+   --fw-h4: 600;
+   --lh-h4: 1.2;
+   --ls-h4: -2%;
+
+   --fs-lg: 1.25rem;
+   --fw-lg: 400;
+   --lh-lg: 1.5;
+   --ls-lg: -2%;
+
+   --fs-md: 1rem;
+   --fw-md: 400;
+   --lh-md: 1.6;
+   --ls-md: -2%;
+
+   --fs-sm: 0.875rem;
+   --fw-sm: 400;
+   --lh-sm: 1.6;
+   --ls-sm: -2%;
+
+   --fs-legal: 0.625rem;
+   --fw-legal: 300;
+   --lh-legal: 1.5;
+   --ls-legal: -2%;
+
+   --fs-btn: var(--fs-md);
+   --fw-btn: 700;
+   --lh-btn: 1;
+   --ls-btn: -2%;
+
+   --fs-ctrl: var(--fs-md);
+   --fw-ctrl: 600;
+   --lh-ctrl: 1.2;
+   --ls-ctrl: -5%;
 }

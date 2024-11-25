@@ -1,0 +1,10 @@
+form {
+   margin-inline: auto;
+   width: min(100%, 45ch);
+   display: flex;
+   flex-direction: column;
+   gap: 1em;
+}
+
+input:not([type="checkbox"], [type="radio"]) {
+}
