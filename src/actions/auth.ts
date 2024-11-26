@@ -8,6 +8,8 @@ import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
+const HASH_ITERATIONS: number = 310000;
+
 export async function signup(
   data: Pick<User, "email" | "password" | "firstName" | "lastName">
 ): Promise<ActionResponse<null>> {
@@ -23,7 +25,7 @@ export async function signup(
   }
 
   const salt = randomBytes(16);
-  const hashedPassword = pbkdf2Sync(data.password, salt, 310000, 32, "sha256");
+  const hashedPassword = pbkdf2Sync(data.password, salt, HASH_ITERATIONS, 32, "sha256");
 
   try {
     await prisma.user.create({
@@ -51,8 +53,9 @@ export async function signup(
 export async function login(data: {
   email: string;
   password: string;
+  remember: boolean;
 }): Promise<ActionResponse<Partial<User>>> {
-  const missing = (["email", "password"] as const).filter((field) => !data[field]);
+  const missing = (["email", "password", "remember"] as const).filter((field) => (!data[field] && data[field] !== false));
 
   if (missing.length) {
     return {
@@ -72,7 +75,7 @@ export async function login(data: {
     };
   }
 
-  const hashed = pbkdf2Sync(data.password, Buffer.from(user.salt, "hex"), 310000, 32, "sha256");
+  const hashed = pbkdf2Sync(data.password, Buffer.from(user.salt, "hex"), HASH_ITERATIONS, 32, "sha256");
 
   if (hashed.toString("hex") !== user.password) {
     return {
@@ -80,6 +83,7 @@ export async function login(data: {
       message: "Invalid username or password",
     };
   }
+
 
   const token = jwt.sign(
     {
@@ -94,10 +98,16 @@ export async function login(data: {
 
   const d = new Date();
   const cookieStore = await cookies();
-  cookieStore.set("usrjwt", token, {
-    httpOnly: true,
-    expires: d.setTime(d.getTime() + 360 * 24 * 7 * 1000),
-  });
+  if (data.remember) {
+    cookieStore.set("usrjwt", token, {
+      httpOnly: true,
+      expires: d.setTime(d.getTime() + 360 * 24 * 7 * 1000),
+    });
+  } else {
+    cookieStore.set("usrjwt", token, {
+      httpOnly: true
+    });
+  }
 
   return {
     success: true,

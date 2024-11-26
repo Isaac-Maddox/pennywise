@@ -31,6 +31,8 @@ CREATE TABLE "Transaction" (
 CREATE TABLE "Category" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
+    "budget" INTEGER NOT NULL,
+    "color" TEXT NOT NULL DEFAULT 'blue',
     "disabled" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,

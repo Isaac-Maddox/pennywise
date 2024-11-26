@@ -3,7 +3,7 @@
 import { login } from "@/actions/auth";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { Outline } from "@/components/logos";
 
 const initialFormState: LoginFormState = {
@@ -14,10 +14,13 @@ const initialFormState: LoginFormState = {
 
 export default function LoginPage() {
    const [formState, setFormState] = useState<LoginFormState>(initialFormState);
+   const [isProcessing, setIsProcessing] = useState(false);
    const [error, setError] = useState("");
 
    const submitForm = async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
+
+      setIsProcessing(true);
 
       const { success, message } = await login(formState);
 
@@ -26,6 +29,8 @@ export default function LoginPage() {
       } else {
          setError(message);
       }
+
+      setIsProcessing(false);
    };
 
    const updateFormState = (e: ChangeEvent<HTMLInputElement>) => {
@@ -42,49 +47,34 @@ export default function LoginPage() {
          <aside className="callout-card">
             <Outline />
             <h1>Welcome back to Pennywise!</h1>
-            <p className="text-lg">
-               We&apos;re glad to see you again! Log in and we&apos;ll get you back to where you left off last time.
-            </p>
+            <p className="text-lg">We&apos;re glad to see you again! Log in and we&apos;ll get you back to where you left off last time.</p>
          </aside>
          <main>
             <form className="auth-form" action="/api/login" method="post" onSubmit={(e) => submitForm(e)}>
                <h2>Log In</h2>
                <div className="form-control">
-                  <label htmlFor="email">Email</label>
-                  <input
-                     type="email"
-                     name="email"
-                     id="email"
-                     value={formState.email}
-                     onChange={updateFormState}
-                     required
-                  />
+                  <label htmlFor="email">
+                     Email<span>*</span>
+                  </label>
+                  <input type="email" name="email" id="email" className={error ? "error" : ""} value={formState.email} onChange={updateFormState} required />
                </div>
                <div className="form-control">
-                  <label htmlFor="password">Password</label>
-                  <input
-                     type="password"
-                     name="password"
-                     id="password"
-                     value={formState.password}
-                     onChange={updateFormState}
-                     required
-                  />
+                  <label htmlFor="password">
+                     Password<span>*</span>
+                  </label>
+                  <input type="password" name="password" id="password" className={error ? "error" : ""} value={formState.password} onChange={updateFormState} required />
                </div>
                <div className="form-control">
-                  <input
-                     type="checkbox"
-                     name="remember"
-                     id="remember"
-                     checked={formState.remember}
-                     onChange={updateFormState}
-                  />
-                  <label htmlFor="remember">Remember me</label>
+                  <label htmlFor="remember">
+                     <input type="checkbox" name="remember" id="remember" checked={formState.remember} onChange={updateFormState} /> Remember me
+                  </label>
                </div>
-               {error && <p>{error}</p>}
-               <button type="submit">Log in</button>
+               {error && <p className="text-error">{error}</p>}
+               <button type="submit" disabled={isProcessing}>
+                  {!isProcessing ? "Log in" : "Processing..."}
+               </button>
                <hr />
-               <Link href="/signup">Don't have an account?</Link>
+               <Link href="/signup">Don&apos;t have an account?</Link>
             </form>
          </main>
       </>

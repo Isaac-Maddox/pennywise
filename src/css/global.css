@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@100..900&family=Sora:wght@100..800&display=swap');
+
 @import url("./vars.css");
 @import url("./components/forms.css");
+@import url("./components/buttons.css");
 
 *,
 *::before,
@@ -103,4 +106,15 @@ button,
 hr {
    border: none;
    border-block: 1px solid var(--border-1);
+}
+
+a {
+   color: var(--theme);
+   text-decoration: dotted underline;
+   text-underline-offset: .25em;
+   text-decoration-thickness: 2px;
+}
+
+.text-error {
+   color: var(--error-text);
 }

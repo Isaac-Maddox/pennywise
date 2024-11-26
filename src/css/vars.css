@@ -4,6 +4,9 @@
    --border-1: light-dark(hsl(240, 22%, 90%), #fff);
 
    --theme: hsl(240, 50%, 35%);
+   --theme-bright: hsl(240, 50%, 40%);
+   --theme-brighter: hsl(240, 50%, 42%);
+   --theme-desaturated: hsl(240, 25%, 45%);
 
    --focused-border: var(--theme);
    --focused-outline: hsla(240, 50%, 35%, 15%);
@@ -11,13 +14,13 @@
    --error-outline: hsla(0, 85%, 35%, 15%);
 
    --heading-text: light-dark(hsl(240, 25%, 20%), #fff);
-   --body-text: light-dark(hsl(240, 20%, 30%));
-   --label-text: light-dark(hsl(240, 20%, 60%));
-   --red-text: hsl(0, 85%, 35%);
-   --error-text: var(--red-text);
-   --link-text: var(--theme);
-   --heading-on-theme: hsl(0, 0%, 100%);
-   --text-on-theme: hsl(240, 74%, 85%);
+   --body-text: light-dark(hsl(240, 20%, 30%), #fff);
+   --label-text: light-dark(hsl(240, 20%, 60%), #fff);
+   --red-text: light-dark(hsl(0, 85%, 35%), #fff);
+   --error-text: light-dark(var(--red-text), #fff);
+   --link-text: light-dark(var(--theme), #fff);
+   --heading-on-theme: light-dark(hsl(0, 0%, 100%), #fff);
+   --text-on-theme: light-dark(hsl(240, 74%, 85%), #fff);
 
    --ff-heading: "Sora", serif;
    --ff-body: "Onest", sans-serif;
@@ -68,7 +71,7 @@
    --ls-btn: -2%;
 
    --fs-ctrl: var(--fs-md);
-   --fw-ctrl: 600;
+   --fw-ctrl: 500;
    --lh-ctrl: 1.2;
    --ls-ctrl: -5%;
 }
