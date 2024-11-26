@@ -84,7 +84,6 @@ export async function login(data: {
     };
   }
 
-
   const token = jwt.sign(
     {
       ...user,
