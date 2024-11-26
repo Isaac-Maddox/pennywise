@@ -4,6 +4,7 @@ form {
    display: flex;
    flex-direction: column;
    gap: 1em;
+   padding-inline: 1.5rem;
 }
 
 .form-control {
