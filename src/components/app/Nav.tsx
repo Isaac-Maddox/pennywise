@@ -2,6 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Logo_Lettermark } from "../icons";
+
+import "@/css/components/nav.css";
 
 export default function Nav() {
    const path = usePathname();
@@ -9,28 +12,47 @@ export default function Nav() {
    const year = new Date().getFullYear();
 
    return (
-      <nav>
-         <NavLink href="/app" path={path}>
-            Dashboard
-         </NavLink>
-         <NavLink href="/app/transactions" path={path}>
-            Transactions
-         </NavLink>
-         <NavLink href="/app/budget" path={path}>
-            My Budget
-         </NavLink>
-         <NavLink href="/app/recap" path={path}>
-            My {year} Recap
-         </NavLink>
+      <nav className="app-nav">
+         <div className="app-nav-left">
+            <Logo_Lettermark />
+            <ul className="app-nav-links" role="list">
+               <NavLink href="/app" path={path}>
+                  Dashboard
+               </NavLink>
+               <NavLink href="/app/transactions" path={path}>
+                  Transactions
+               </NavLink>
+               <NavLink href="/app/budget" path={path}>
+                  My Budget
+               </NavLink>
+               <NavLink href="/app/recap" path={path}>
+                  My {year} Recap
+               </NavLink>
+            </ul>
+         </div>
+         <ul className="app-nav-actions" role="list">
+            <li>
+               <Link href="/account" className="btn outline">
+                  Account
+               </Link>
+            </li>
+            <li>
+               <Link href="/" className="btn">
+                  Transaction
+               </Link>
+            </li>
+         </ul>
       </nav>
    );
 }
 
 function NavLink({ href, path, children }: NavLinkProps) {
    return (
-      <Link href={href} className={path === href ? "active" : ""}>
-         {children}
-      </Link>
+      <li>
+         <Link href={href} className={path === href ? "active" : ""}>
+            {children}
+         </Link>
+      </li>
    );
 }
 

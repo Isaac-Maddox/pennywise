@@ -4,7 +4,7 @@ import { login } from "@/actions/auth";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { Outline } from "@/components/logos";
+import { Outline } from "@/components/icons";
 
 const initialFormState: LoginFormState = {
    email: "",
@@ -47,7 +47,9 @@ export default function LoginPage() {
          <aside className="callout-card">
             <Outline />
             <h1>Welcome back to Pennywise!</h1>
-            <p className="text-lg">We&apos;re glad to see you again! Log in and we&apos;ll get you back to where you left off last time.</p>
+            <p className="text-lg">
+               We&apos;re glad to see you again! Log in and we&apos;ll get you back to where you left off last time.
+            </p>
          </aside>
          <main>
             <form className="auth-form" action="/api/login" method="post" onSubmit={(e) => submitForm(e)}>
@@ -56,17 +58,40 @@ export default function LoginPage() {
                   <label htmlFor="email">
                      Email<span>*</span>
                   </label>
-                  <input type="email" name="email" id="email" className={error ? "error" : ""} value={formState.email} onChange={updateFormState} required />
+                  <input
+                     type="email"
+                     name="email"
+                     id="email"
+                     className={error ? "error" : ""}
+                     value={formState.email}
+                     onChange={updateFormState}
+                     required
+                  />
                </div>
                <div className="form-control">
                   <label htmlFor="password">
                      Password<span>*</span>
                   </label>
-                  <input type="password" name="password" id="password" className={error ? "error" : ""} value={formState.password} onChange={updateFormState} required />
+                  <input
+                     type="password"
+                     name="password"
+                     id="password"
+                     className={error ? "error" : ""}
+                     value={formState.password}
+                     onChange={updateFormState}
+                     required
+                  />
                </div>
                <div className="form-control">
                   <label htmlFor="remember">
-                     <input type="checkbox" name="remember" id="remember" checked={formState.remember} onChange={updateFormState} /> Remember me
+                     <input
+                        type="checkbox"
+                        name="remember"
+                        id="remember"
+                        checked={formState.remember}
+                        onChange={updateFormState}
+                     />{" "}
+                     Remember me
                   </label>
                </div>
                {error && <p className="text-error">{error}</p>}

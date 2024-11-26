@@ -1,0 +1,54 @@
+.app-nav {
+   position: sticky;
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: space-between;
+   inset-block-start: 0rem;
+   padding-block: 3rem 1rem;
+   inset-inline: 0;
+   padding-inline: calc((100% - var(--content-width-md)) / 2);
+   background-color: var(--background-1);
+
+   .app-nav-left {
+      display: flex;
+      flex-direction: row;
+      gap: 3rem;
+      align-items: center;
+   }
+
+   svg {
+      height: 3em;
+      width: auto;
+   }
+
+   ul {
+      display: flex;
+      flex-direction: row;
+   }
+
+   .app-nav-links {
+      gap: 1.75em;
+
+      a:not(.active) {
+         text-decoration: underline transparent;
+         color: var(--body-text);
+         transition: text-decoration 150ms ease, color 150ms ease;
+
+         &:hover,
+         &:focus-visible {
+            color: var(--theme);
+            text-decoration: underline;
+            text-underline-offset: 0.25em;
+         }
+      }
+
+      .active {
+         font-weight: var(--fw-strong);
+      }
+   }
+
+   .app-nav-actions {
+      gap: 0.5em;
+   }
+}

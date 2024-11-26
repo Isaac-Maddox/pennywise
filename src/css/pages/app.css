@@ -1,0 +1,5 @@
+.app-page {
+   margin-inline: auto;
+   width: var(--content-width-md);
+   padding-block: 3rem;
+}

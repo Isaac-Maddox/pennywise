@@ -6,24 +6,29 @@ button,
    --_background-active: var(--theme-brighter);
    --_focus-outline: var(--focused-outline);
    --_border: var(--theme);
+   --_border-hover: var(--theme-bright);
    --_color: var(--heading-on-theme);
 
-   padding: .875em 1em;
+   padding: 0.875em 1em;
    background-color: var(--_background);
    border: 1px solid var(--_border);
    color: var(--_color);
-   gap: .5em;
+   gap: 0.5em;
    display: flex;
    align-items: center;
    justify-content: center;
    cursor: pointer;
-   border-radius: .5em;
+   border-radius: 0.5em;
    outline: 3px solid transparent;
-   transition: background-color 150ms ease, outline 150ms ease;
+   outline-offset: 0px;
+   transition: 150ms ease;
+   transition-property: background-color, outline, border;
+   text-decoration: none;
 
    &:not(:disabled) {
       &:hover {
          background-color: var(--_background-hover);
+         border-color: var(--_border-hover);
       }
 
       &:focus {
@@ -37,5 +42,14 @@ button,
 
    &:disabled {
       background-color: var(--_background-disabled);
+   }
+
+   &.outline {
+      --_color: var(--theme);
+      --_background: transparent;
+      --_background-hover: var(--background-2);
+      --_background-active: var(--background-3);
+      --_border: var(--border-1);
+      --_border-hover: var(--border-2);
    }
 }

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Onest:wght@100..900&family=Sora:wght@100..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Onest:wght@100..900&family=Sora:wght@100..800&display=swap");
 
 @import url("./vars.css");
 @import url("./components/forms.css");
@@ -111,10 +111,20 @@ hr {
 a {
    color: var(--theme);
    text-decoration: dotted underline;
-   text-underline-offset: .25em;
+   text-underline-offset: 0.25em;
    text-decoration-thickness: 2px;
 }
 
 .text-error {
    color: var(--error-text);
+}
+
+ul[role="list"],
+ol[role="list"] {
+   list-style: none;
+}
+
+strong,
+.text-strong {
+   font-weight: var(--fw-strong);
 }
