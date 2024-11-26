@@ -1,0 +1,36 @@
+.auth-page {
+   width: 100%;
+   height: 100%;
+   display: grid;
+   grid-template-columns: 2fr 3fr;
+
+   @media (width < 1024px) {
+      grid-template-columns: 1fr;
+   }
+}
+
+.callout-card {
+   background-color: var(--theme);
+   height: 100%;
+   padding: max(2em, 7.5vw);
+   align-content: center;
+
+   h1 {
+      color: var(--heading-on-theme);
+      margin-block: 0.375em;
+   }
+
+   p {
+      color: var(--text-on-theme);
+   }
+
+   @media (width < 1024px) {
+      display: none;
+   }
+}
+
+main {
+   align-content: center;
+   background-image: url("../../../public/auth_background.svg");
+   padding-block: 3rem;
+}

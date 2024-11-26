@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@100..900&family=Sora:wght@100..800&display=swap');
+
+@import url("./vars.css");
+@import url("./components/forms.css");
+@import url("./components/buttons.css");
+
+*,
+*::before,
+*::after {
+   box-sizing: border-box;
+   font-family: var(--ff-body);
+   margin: 0;
+   padding: 0;
+}
+
+body,
+html {
+   height: 100%;
+   width: 100%;
+}
+
+img {
+   max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4 {
+   font-family: var(--ff-heading);
+}
+
+h1 {
+   font-size: var(--fs-h1);
+   font-weight: var(--fw-h1);
+   line-height: var(--lh-h1);
+   letter-spacing: var(--ls-h1);
+}
+
+h2 {
+   font-size: var(--fs-h2);
+   font-weight: var(--fw-h2);
+   line-height: var(--lh-h2);
+   letter-spacing: var(--ls-h2);
+}
+
+h3 {
+   font-size: var(--fs-h3);
+   font-weight: var(--fw-h3);
+   line-height: var(--lh-h3);
+   letter-spacing: var(--ls-h3);
+}
+
+h4 {
+   font-size: var(--fs-h4);
+   font-weight: var(--fw-h4);
+   line-height: var(--lh-h4);
+   letter-spacing: var(--ls-h4);
+}
+
+.text-lg {
+   font-size: var(--fs-lg);
+   font-weight: var(--fw-lg);
+   line-height: var(--lh-lg);
+   letter-spacing: var(--ls-lg);
+}
+
+p,
+.text-md {
+   font-size: var(--fs-md);
+   font-weight: var(--fw-md);
+   line-height: var(--lh-md);
+   letter-spacing: var(--ls-md);
+}
+
+small,
+.text-sm {
+   font-size: var(--fs-sm);
+   font-weight: var(--fw-sm);
+   line-height: var(--lh-sm);
+   letter-spacing: var(--ls-sm);
+}
+
+.text-legal {
+   font-size: var(--fs-legal);
+   font-weight: var(--fw-legal);
+   line-height: var(--lh-legal);
+   letter-spacing: var(--ls-legal);
+}
+
+button,
+.btn {
+   font-size: var(--fs-btn);
+   font-weight: var(--fw-btn);
+   line-height: var(--lh-btn);
+   letter-spacing: var(--ls-btn);
+}
+
+.text-form-control {
+   font-size: var(--fs-ctrl);
+   font-weight: var(--fw-ctrl);
+   line-height: var(--lh-ctrl);
+   letter-spacing: var(--ls-ctrl);
+}
+
+hr {
+   border: none;
+   border-block: 1px solid var(--border-1);
+}
+
+a {
+   color: var(--theme);
+   text-decoration: dotted underline;
+   text-underline-offset: .25em;
+   text-decoration-thickness: 2px;
+}
+
+.text-error {
+   color: var(--error-text);
+}

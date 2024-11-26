@@ -1,0 +1,41 @@
+button,
+.btn {
+   --_background: var(--theme);
+   --_background-disabled: var(--theme-desaturated);
+   --_background-hover: var(--theme-bright);
+   --_background-active: var(--theme-brighter);
+   --_focus-outline: var(--focused-outline);
+   --_border: var(--theme);
+   --_color: var(--heading-on-theme);
+
+   padding: .875em 1em;
+   background-color: var(--_background);
+   border: 1px solid var(--_border);
+   color: var(--_color);
+   gap: .5em;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   cursor: pointer;
+   border-radius: .5em;
+   outline: 3px solid transparent;
+   transition: background-color 150ms ease, outline 150ms ease;
+
+   &:not(:disabled) {
+      &:hover {
+         background-color: var(--_background-hover);
+      }
+
+      &:focus {
+         outline-color: var(--_focus-outline);
+      }
+
+      &:active {
+         background-color: var(--_background-active);
+      }
+   }
+
+   &:disabled {
+      background-color: var(--_background-disabled);
+   }
+}

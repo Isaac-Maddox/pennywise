@@ -1,0 +1,111 @@
+form {
+   margin-inline: auto;
+   width: min(100%, 45ch);
+   display: flex;
+   flex-direction: column;
+   gap: 1em;
+   padding-inline: 1.5rem;
+}
+
+.form-control {
+   display: flex;
+   flex-direction: column;
+   gap: .137em;
+
+   label {
+      color: var(--label-text);
+      transition: color 150ms ease;
+
+      span {
+         color: var(--red-text);
+      }
+
+      &:has(+ .error) {
+         color: var(--error-text);
+      }
+   }
+
+   &:not(:has(.error)):focus-within label {
+      color: var(--theme);
+   }
+
+
+   &:has(input[type="checkbox"]) {
+      cursor: pointer;
+      display: flex;
+      flex-direction: row;
+      gap: .5em;
+      align-items: center;
+
+      label {
+         color: var(--body-text);
+         cursor: inherit;
+         display: flex;
+         align-items: center;
+         gap: .5em;
+
+         &::before {
+            content: "";
+            height: 20px;
+            width: 20px;
+            border: 1px solid var(--border-1);
+            border-radius: .25em;
+            cursor: pointer;
+            display: grid;
+            justify-content: center;
+            background-color: transparent;
+            transition: background-color 150ms ease, border 150ms ease, outline 150ms ease;
+         }
+
+         &:has(:checked)::before {
+            background-color: var(--theme);
+            border-color: var(--theme);
+            background-image: url("../../../public/check_mark.svg");
+            background-size: 60%;
+            background-position: center;
+            background-repeat: no-repeat;
+         }
+      }
+
+      input[type="checkbox"] {
+         position: absolute;
+         clip: rect(1px, 1px, 1px, 1px);
+         -webkit-clip-path: inset(0px 0px 99.9% 99.9%);
+         clip-path: inset(0px 0px 99.9% 99.9%);
+         overflow: hidden;
+         height: 1px;
+         width: 1px;
+         padding: 0;
+         border: 0;
+      }
+   }
+}
+
+input:not([type="checkbox"], [type="radio"]),
+select {
+   font-size: var(--fs-ctrl);
+   font-weight: var(--fw-ctrl);
+   line-height: var(--lh-ctrl);
+   letter-spacing: var(--ls-ctrl);
+
+   padding: .75rem 1rem;
+   border: 1px solid var(--border-1);
+   border-radius: .375em;
+   color: var(--body-text);
+   transition: border 150ms ease, outline 150ms ease;
+   outline: 3px solid transparent;
+
+   &:focus-visible {
+      border-color: var(--focused-border);
+      outline-color: var(--focused-outline);
+   }
+
+   &.error {
+      color: var(--error-text);
+      border-color: var(--error-border);
+
+      &:focus-visible {
+         outline-color: var(--error-outline);
+      }
+   }
+}
