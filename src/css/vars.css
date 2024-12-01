@@ -19,15 +19,19 @@
    --error-outline: hsla(0, 85%, 35%, 15%);
 
    --budget-theme: var(--theme);
-   --budget-theme-dim: hsl(240, 50%, 90%);
    --budget-theme-projected: hsl(240, 50%, 75%);
+   --budget-theme-dim: hsl(240, 50%, 90%);
    --budget-red: hsl(0, 69%, 55%);
+   --budget-red-projected: hsl(0, 69%, 80%);
    --budget-red-dim: hsl(0, 69%, 90%);
    --budget-green: hsl(133, 44%, 47%);
+   --budget-green-projected: hsl(133, 44%, 60%);
    --budget-green-dim: hsl(133, 44%, 90%);
    --budget-teal: hsl(180, 50%, 35%);
+   --budget-teal-projected: hsl(180, 50%, 50%);
    --budget-teal-dim: hsl(180, 50%, 90%);
    --budget-blue: hsl(203, 44%, 47%);
+   --budget-blue-projected: hsl(203, 44%, 75%);
    --budget-blue-dim: hsl(203, 44%, 90%);
 
    --heading-text: light-dark(hsl(240, 25%, 20%), #fff);

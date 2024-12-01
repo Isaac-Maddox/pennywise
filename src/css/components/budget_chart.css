@@ -20,6 +20,7 @@
    isolation: isolate;
    position: relative;
    width: 100%;
+   max-width: 30rem;
    aspect-ratio: 1;
    border-radius: 50%;
    background-image: conic-gradient(
@@ -70,21 +71,25 @@
 
    &.color-red {
       --_color: var(--budget-red);
+      --_color-projected: var(--budget-red-projected);
       --_dim: var(--budget-red-dim);
    }
 
    &.color-green {
       --_color: var(--budget-green);
+      --_color-projected: var(--budget-green-projected);
       --_dim: var(--budget-green-dim);
    }
 
    &.color-teal {
       --_color: var(--budget-teal);
+      --_color-projected: var(--budget-teal-projected);
       --_dim: var(--budget-teal-dim);
    }
 
    &.color-blue {
       --_color: var(--budget-blue);
+      --_color-projected: var(--budget-blue-projected);
       --_dim: var(--budget-blue-dim);
    }
 }

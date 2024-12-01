@@ -1,36 +1,32 @@
 "use client";
 
 import { toKebabCase } from "@/utils/string";
-import { Category } from "@prisma/client";
 import "@/css/components/budget_chart.css";
 import { useEffect, useRef } from "react";
 
-export default function BudgetChart({ size = "small", category, budget, multiplier, amount, name }: BudgetChartProps) {
+export default function BudgetChart({
+   size = "small",
+   color = "theme",
+   budget,
+   multiplier,
+   amount,
+   name,
+}: BudgetChartProps) {
    const chartElement = useRef<HTMLDivElement>(null);
 
    let displayPercentage = 0;
    let gradientDegrees = 0;
    let overBudget = false;
-   const displayName = category?.name || name || "Total";
-   const color = category?.color || "theme";
    const percentTextSize = size === "small" ? "text-h2" : "text-h1";
    const nameTextSize = size === "small" ? "text-md" : "text-lg";
 
-   if (category) {
-      // const _ = category.id;
-      // Make and call a fucntion to get
-      // SELECT SUM(amount) FROM Transaction
-      // WHERE userId = budget.user.id AND
-      // categoryId = budgetId
+   displayPercentage = Math.round((amount / budget) * 100);
+   overBudget = amount > budget;
+   if (overBudget) {
+      gradientDegrees = displayPercentage - 100;
+      console.log(gradientDegrees);
    } else {
-      displayPercentage = Math.round((amount / budget) * 100);
-      overBudget = amount > budget;
-      if (overBudget) {
-         gradientDegrees = displayPercentage - 100;
-         console.log(gradientDegrees);
-      } else {
-         gradientDegrees = displayPercentage;
-      }
+      gradientDegrees = displayPercentage;
    }
 
    useEffect(() => {
@@ -44,31 +40,18 @@ export default function BudgetChart({ size = "small", category, budget, multipli
       <div
          ref={chartElement}
          className={`budget-chart color-${color} chart-${size} ${overBudget ? "over-budget" : ""}`}>
-         <progress
-            className="visually-hidden"
-            id={toKebabCase(displayName)}
-            value={gradientDegrees}
-            max={100}></progress>
+         <progress className="visually-hidden" id={toKebabCase(name)} value={gradientDegrees} max={100}></progress>
          <p className={`category-percent ${percentTextSize}`}>{displayPercentage}%</p>
-         <p className={`category-name ${nameTextSize}`}>{displayName}</p>
+         <p className={`category-name ${nameTextSize}`}>{name}</p>
       </div>
    );
 }
 
-type BudgetChartProps =
-   | {
-        category: Category;
-        multiplier?: number;
-        size?: "large" | "small";
-        budget?: never;
-        amount?: never;
-        name?: never;
-     }
-   | {
-        budget: number;
-        multiplier?: number;
-        amount: number;
-        name?: string;
-        size?: "large" | "small";
-        category?: never;
-     };
+interface BudgetChartProps {
+   budget: number;
+   name: string;
+   amount: number;
+   multiplier?: number;
+   color?: string;
+   size?: "large" | "small";
+}

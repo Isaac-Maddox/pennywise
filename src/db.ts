@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prismaSingleton = () => {
    return new PrismaClient({
-      log: process.env.NODE_ENV === "development" ? ["query", "error"] : [],
+      log: process.env.NODE_ENV === "development" && process.env.PRISMA_LOG === "true" ? ["query", "error"] : [],
    });
 };
 

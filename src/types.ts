@@ -1,3 +1,5 @@
+import { Category, Transaction } from "@prisma/client";
+
 export type ActionResponse<Data = any> =
    | {
         success: true;
@@ -9,3 +11,7 @@ export type ActionResponse<Data = any> =
         data?: never;
         message: string;
      };
+
+export type CategoryWithTransactions = Category & {
+   transactions: Pick<Transaction, "amount">[];
+};

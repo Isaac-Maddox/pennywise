@@ -1,10 +1,9 @@
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 import { User } from "@prisma/client";
-import Header from "@/components/app/dashboard/Header";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
-import HeaderFallback from "@/components/app/dashboard/HeaderFallback";
+import DashboardPage from "@/components/app/dashboard/DashboardPage";
 
 export default async function AppHome() {
    const cookieStore = await cookies();
@@ -17,8 +16,8 @@ export default async function AppHome() {
 
    return (
       <>
-         <Suspense fallback={<HeaderFallback user={user} />}>
-            <Header user={user} />
+         <Suspense fallback={<p>loading</p>}>
+            <DashboardPage user={user} />
          </Suspense>
       </>
    );
