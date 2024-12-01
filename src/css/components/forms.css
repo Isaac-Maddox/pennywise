@@ -7,10 +7,22 @@ form {
    padding-inline: 1.5rem;
 }
 
+.form-group {
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   gap: 0.5em;
+
+   @media (width < 1024px) {
+      grid-template-columns: 1fr;
+      gap: inherit;
+   }
+}
+
 .form-control {
    display: flex;
    flex-direction: column;
-   gap: .137em;
+   gap: 0.137em;
+   min-width: 100%;
 
    label {
       color: var(--label-text);
@@ -29,12 +41,11 @@ form {
       color: var(--theme);
    }
 
-
    &:has(input[type="checkbox"]) {
       cursor: pointer;
       display: flex;
       flex-direction: row;
-      gap: .5em;
+      gap: 0.5em;
       align-items: center;
 
       label {
@@ -42,14 +53,14 @@ form {
          cursor: inherit;
          display: flex;
          align-items: center;
-         gap: .5em;
+         gap: 0.5em;
 
          &::before {
             content: "";
             height: 20px;
             width: 20px;
             border: 1px solid var(--border-1);
-            border-radius: .25em;
+            border-radius: 0.25em;
             cursor: pointer;
             display: grid;
             justify-content: center;
@@ -88,12 +99,13 @@ select {
    line-height: var(--lh-ctrl);
    letter-spacing: var(--ls-ctrl);
 
-   padding: .75rem 1rem;
+   padding: 0.75rem 1rem;
    border: 1px solid var(--border-1);
-   border-radius: .375em;
+   border-radius: 0.375em;
    color: var(--body-text);
    transition: border 150ms ease, outline 150ms ease;
    outline: 3px solid transparent;
+   max-width: 100%;
 
    &:focus-visible {
       border-color: var(--focused-border);

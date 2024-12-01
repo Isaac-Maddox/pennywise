@@ -1,15 +1,71 @@
-.budget-chart {
-   --_color: var(--theme);
+@property --_progress {
+   syntax: "<angle>";
+   inherits: false;
+   initial-value: 0deg;
+}
 
-   width: 20rem;
+@property --_projected {
+   syntax: "<angle>";
+   inherits: false;
+   initial-value: 0deg;
+}
+
+.budget-chart {
+   --_color: var(--budget-theme);
+   --_dim: var(--budget-theme-dim);
+   --_color-projected: var(--budget-theme-projected);
+   --_progress: 0deg;
+   --_projected: 0deg;
+
+   isolation: isolate;
+   position: relative;
+   width: 100%;
    aspect-ratio: 1;
    border-radius: 50%;
-   background-image: conic-gradient(var(--_color) 180deg, var(--background-1) 180deg);
-   display: grid;
-   place-content: center;
+   background-image: conic-gradient(
+      var(--_color) var(--_progress),
+      var(--_color-projected) calc(var(--_progress) + min(var(--_progress), 0.25deg)) var(--_projected),
+      var(--_dim) calc(var(--_projected) + min(var(--_progress), 0.25deg))
+   );
+   transition: --_progress 2s ease, --_projected 2s ease;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   text-align: center;
+
+   * {
+      animation: fade-in 1s ease;
+   }
+
+   &.over-budget {
+      background-color: var(--_color);
+      background-image: conic-gradient(var(--error-border) var(--_progress), transparent 0deg);
+
+      .category-percent {
+         color: var(--error-text);
+      }
+   }
+
+   &::after {
+      content: "";
+      inset: 10%;
+      background-color: var(--background-1);
+      border-radius: 50%;
+      position: absolute;
+      z-index: -1;
+   }
 
    .category-percent {
       color: var(--_color);
+      margin: 0;
+   }
+
+   .category-name {
+      max-width: 65%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
    }
 
    &.color-red {
@@ -30,5 +86,14 @@
    &.color-blue {
       --_color: var(--budget-blue);
       --_dim: var(--budget-blue-dim);
+   }
+}
+
+@keyframes fade-in {
+   from {
+      opacity: 0;
+   }
+   to {
+      opacity: 1;
    }
 }

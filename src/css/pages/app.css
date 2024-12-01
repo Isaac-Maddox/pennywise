@@ -3,3 +3,27 @@
    width: var(--content-width-md);
    padding-block: 3rem;
 }
+
+header {
+   display: grid;
+   grid-template-columns: 1fr 1.5fr;
+   place-items: center;
+   gap: 4em;
+
+   .header-charts {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 1fr 1fr;
+      gap: 2em;
+
+      :first-child {
+         grid-column: 1 / 3;
+         grid-row: 1 / 3;
+      }
+   }
+
+   button {
+      margin-block-start: 1.5em;
+   }
+}

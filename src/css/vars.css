@@ -18,6 +18,9 @@
    --error-border: hsl(0, 85%, 35%);
    --error-outline: hsla(0, 85%, 35%, 15%);
 
+   --budget-theme: var(--theme);
+   --budget-theme-dim: hsl(240, 50%, 90%);
+   --budget-theme-projected: hsl(240, 50%, 75%);
    --budget-red: hsl(0, 69%, 55%);
    --budget-red-dim: hsl(0, 69%, 90%);
    --budget-green: hsl(133, 44%, 47%);
@@ -37,7 +40,7 @@
    --text-on-theme: light-dark(hsl(240, 74%, 85%), #fff);
 
    --page-padding: 3rem;
-   --content-width-md: min(100% - var(--page-padding), 80rem);
+   --content-width-md: min(100% - var(--page-padding), 90rem);
 
    --ff-heading: "Sora", serif;
    --ff-body: "Onest", sans-serif;
@@ -93,6 +96,8 @@
    --ls-ctrl: -0.05em;
 
    --fw-strong: 700;
+
+   --z-nav: 2;
 
    @media (width < 1024px) {
       --page-padding: 1.5rem;
