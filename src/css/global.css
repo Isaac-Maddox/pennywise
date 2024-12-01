@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Onest:wght@100..900&family=Sora:wght@100..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Onest:wght@100..900&family=Sora:wght@100..800&display=swap");
 
 @import url("./vars.css");
 @import url("./components/forms.css");
@@ -15,7 +15,8 @@
 
 body,
 html {
-   height: 100%;
+   height: fit-content;
+   min-height: 100svh;
    width: 100%;
 }
 
@@ -27,31 +28,57 @@ h1,
 h2,
 h3,
 h4 {
-   font-family: var(--ff-heading);
+   &:is(p + :is(h1, h2, h3, h4)) {
+      margin-block-start: 1em;
+   }
+
+   &:is(:is(h1, h2, h3, h4) + :is(h1, h2, h3, h4)) {
+      margin-block-start: 0.875em;
+   }
+
+   &:has(+ p) {
+      margin-block-end: 0.25em;
+   }
 }
 
-h1 {
+h1,
+.text-h1,
+h2,
+.text-h2,
+h3,
+.text-h3,
+h4,
+.text-h4 {
+   font-family: var(--ff-heading);
+   color: var(--heading-text);
+}
+
+h1,
+.text-h1 {
    font-size: var(--fs-h1);
    font-weight: var(--fw-h1);
    line-height: var(--lh-h1);
    letter-spacing: var(--ls-h1);
 }
 
-h2 {
+h2,
+.text-h2 {
    font-size: var(--fs-h2);
    font-weight: var(--fw-h2);
    line-height: var(--lh-h2);
    letter-spacing: var(--ls-h2);
 }
 
-h3 {
+h3,
+.text-h3 {
    font-size: var(--fs-h3);
    font-weight: var(--fw-h3);
    line-height: var(--lh-h3);
    letter-spacing: var(--ls-h3);
 }
 
-h4 {
+h4,
+.text-h4 {
    font-size: var(--fs-h4);
    font-weight: var(--fw-h4);
    line-height: var(--lh-h4);
@@ -71,6 +98,11 @@ p,
    font-weight: var(--fw-md);
    line-height: var(--lh-md);
    letter-spacing: var(--ls-md);
+   color: var(--body-text);
+
+   &:has(+ :is(p, .text-md)) {
+      margin-block-end: 1em;
+   }
 }
 
 small,
@@ -79,6 +111,7 @@ small,
    font-weight: var(--fw-sm);
    line-height: var(--lh-sm);
    letter-spacing: var(--ls-sm);
+   color: var(--body-text);
 }
 
 .text-legal {
@@ -111,10 +144,32 @@ hr {
 a {
    color: var(--theme);
    text-decoration: dotted underline;
-   text-underline-offset: .25em;
+   text-underline-offset: 0.25em;
    text-decoration-thickness: 2px;
 }
 
 .text-error {
    color: var(--error-text);
+}
+
+ul[role="list"],
+ol[role="list"] {
+   list-style: none;
+}
+
+strong,
+.text-strong {
+   font-weight: var(--fw-strong);
+}
+
+.visually-hidden {
+   position: absolute;
+   clip: rect(1px, 1px, 1px, 1px);
+   -webkit-clip-path: inset(0px 0px 99.9% 99.9%);
+   clip-path: inset(0px 0px 99.9% 99.9%);
+   overflow: hidden;
+   height: 1px;
+   width: 1px;
+   padding: 0;
+   border: 0;
 }

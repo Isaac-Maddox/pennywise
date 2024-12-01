@@ -1,7 +1,7 @@
 "use server";
 
 import { Category } from "@prisma/client";
-import { ActionResponse } from "./types";
+import { ActionResponse } from "@/types";
 import prisma from "@/db";
 import { cookies } from "next/headers";
 import { verifyToken } from "./auth";

@@ -1,7 +1,12 @@
 :root {
    color-scheme: light;
 
+   --background-1: hsl(0, 0%, 100%);
+   --background-2: hsl(0, 0%, 97.5%);
+   --background-3: hsl(0, 0%, 95%);
+
    --border-1: light-dark(hsl(240, 22%, 90%), #fff);
+   --border-2: light-dark(hsl(240, 22%, 85%), #fff);
 
    --theme: hsl(240, 50%, 35%);
    --theme-bright: hsl(240, 50%, 40%);
@@ -13,6 +18,18 @@
    --error-border: hsl(0, 85%, 35%);
    --error-outline: hsla(0, 85%, 35%, 15%);
 
+   --budget-theme: var(--theme);
+   --budget-theme-dim: hsl(240, 50%, 90%);
+   --budget-theme-projected: hsl(240, 50%, 75%);
+   --budget-red: hsl(0, 69%, 55%);
+   --budget-red-dim: hsl(0, 69%, 90%);
+   --budget-green: hsl(133, 44%, 47%);
+   --budget-green-dim: hsl(133, 44%, 90%);
+   --budget-teal: hsl(180, 50%, 35%);
+   --budget-teal-dim: hsl(180, 50%, 90%);
+   --budget-blue: hsl(203, 44%, 47%);
+   --budget-blue-dim: hsl(203, 44%, 90%);
+
    --heading-text: light-dark(hsl(240, 25%, 20%), #fff);
    --body-text: light-dark(hsl(240, 20%, 30%), #fff);
    --label-text: light-dark(hsl(240, 20%, 60%), #fff);
@@ -22,56 +39,67 @@
    --heading-on-theme: light-dark(hsl(0, 0%, 100%), #fff);
    --text-on-theme: light-dark(hsl(240, 74%, 85%), #fff);
 
+   --page-padding: 3rem;
+   --content-width-md: min(100% - var(--page-padding), 90rem);
+
    --ff-heading: "Sora", serif;
    --ff-body: "Onest", sans-serif;
 
    --fs-h1: 3rem;
    --fw-h1: 700;
    --lh-h1: 1.2;
-   --ls-h1: -5%;
+   --ls-h1: -0.05em;
 
    --fs-h2: 2.25rem;
    --fw-h2: 600;
    --lh-h2: 1.2;
-   --ls-h2: -5%;
+   --ls-h2: -0.05em;
 
    --fs-h3: 1.75rem;
    --fw-h3: 600;
    --lh-h3: 1.2;
-   --ls-h3: -4%;
+   --ls-h3: -0.04em;
 
    --fs-h4: 1.5rem;
    --fw-h4: 600;
    --lh-h4: 1.2;
-   --ls-h4: -2%;
+   --ls-h4: -0.02em;
 
    --fs-lg: 1.25rem;
    --fw-lg: 400;
    --lh-lg: 1.5;
-   --ls-lg: -2%;
+   --ls-lg: -0.02em;
 
    --fs-md: 1rem;
    --fw-md: 400;
    --lh-md: 1.6;
-   --ls-md: -2%;
+   --ls-md: -0.02em;
 
    --fs-sm: 0.875rem;
    --fw-sm: 400;
    --lh-sm: 1.6;
-   --ls-sm: -2%;
+   --ls-sm: -0.02em;
 
    --fs-legal: 0.625rem;
    --fw-legal: 300;
    --lh-legal: 1.5;
-   --ls-legal: -2%;
+   --ls-legal: -0.02em;
 
    --fs-btn: var(--fs-md);
    --fw-btn: 700;
    --lh-btn: 1;
-   --ls-btn: -2%;
+   --ls-btn: -0.02em;
 
    --fs-ctrl: var(--fs-md);
    --fw-ctrl: 500;
    --lh-ctrl: 1.2;
-   --ls-ctrl: -5%;
+   --ls-ctrl: -0.05em;
+
+   --fw-strong: 700;
+
+   --z-nav: 2;
+
+   @media (width < 1024px) {
+      --page-padding: 1.5rem;
+   }
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { signup } from "@/actions/auth";
-import { Outline } from "@/components/logos";
+import { Outline } from "@/components/icons";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
@@ -30,24 +30,30 @@ export default function SignupPage() {
 
    const submitForm = async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
+      setError("");
 
-      setIsProcessing(true);
+      try {
+         setIsProcessing(true);
 
-      if (formState.password !== formState.confirmPassword) {
-         setError("Passwords do not match");
+         if (formState.password !== formState.confirmPassword) {
+            setError("Passwords do not match");
+            setIsProcessing(false);
+            return;
+         }
+
+         const { success, message } = await signup(formState);
+
+         if (success) {
+            redirect("/login");
+         } else {
+            setError(message);
+         }
+      } catch (error) {
+         setError("We're having problems... Try again in a bit!");
+         console.log(error);
+      } finally {
          setIsProcessing(false);
-         return;
       }
-
-      const { success, message } = await signup(formState);
-
-      if (success) {
-         redirect("/login");
-      } else {
-         setError(message);
-      }
-
-      setIsProcessing(false);
    };
 
    return (
@@ -55,35 +61,89 @@ export default function SignupPage() {
          <aside className="callout-card">
             <Outline />
             <h1>Welcome to Pennywise!</h1>
-            <p className="text-lg">Pennywise helps you get a grip on your finances with handy tools that make it easy to track and manage your monthly spending.</p>
+            <p className="text-lg">
+               Pennywise helps you get a grip on your finances with handy tools that make it easy to track and manage
+               your monthly spending.
+            </p>
          </aside>
          <main>
             <form className="auth-form" action="/signup" method="post" onSubmit={(e) => submitForm(e)}>
-               <h1>Sign up</h1>
+               <h2>Sign up</h2>
 
                <div className="form-control">
-                  <label htmlFor="email">Email</label>
-                  <input type="email" name="email" id="email" className={error && error.includes("email") ? "error" : ""} value={formState.email} onChange={handleFormChange} required autoFocus />
+                  <label htmlFor="email">
+                     Email<span>*</span>
+                  </label>
+                  <input
+                     type="email"
+                     name="email"
+                     id="email"
+                     className={error && error.includes("email") ? "error" : ""}
+                     value={formState.email}
+                     onChange={handleFormChange}
+                     required
+                     autoFocus
+                  />
                </div>
 
-               <div className="form-control">
-                  <label htmlFor="firstName">First name</label>
-                  <input type="text" name="firstName" id="firstName" value={formState.firstName} onChange={handleFormChange} required />
+               <div className="form-group">
+                  <div className="form-control">
+                     <label htmlFor="firstName">
+                        First name<span>*</span>
+                     </label>
+                     <input
+                        type="text"
+                        name="firstName"
+                        id="firstName"
+                        value={formState.firstName}
+                        onChange={handleFormChange}
+                        required
+                     />
+                  </div>
+                  <div className="form-control">
+                     <label htmlFor="lastName">
+                        Last name<span>*</span>
+                     </label>
+                     <input
+                        type="text"
+                        name="lastName"
+                        id="lastName"
+                        value={formState.lastName}
+                        onChange={handleFormChange}
+                        required
+                     />
+                  </div>
                </div>
 
-               <div className="form-control">
-                  <label htmlFor="lastName">Last name</label>
-                  <input type="text" name="lastName" id="lastName" value={formState.lastName} onChange={handleFormChange} required />
-               </div>
-
-               <div className="form-control">
-                  <label htmlFor="password">Password</label>
-                  <input type="password" name="password" id="password" className={error && error.includes("Password") ? "error" : ""} value={formState.password} onChange={handleFormChange} required />
-               </div>
-
-               <div className="form-control">
-                  <label htmlFor="confirmPassword">Confirm password</label>
-                  <input type="password" name="confirmPassword" id="confirmPassword" className={error && error.includes("Password") ? "error" : ""} value={formState.confirmPassword} onChange={handleFormChange} required />
+               <div className="form-group">
+                  <div className="form-control">
+                     <label htmlFor="password">
+                        Password<span>*</span>
+                     </label>
+                     <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        className={error && error.includes("Password") ? "error" : ""}
+                        value={formState.password}
+                        onChange={handleFormChange}
+                        required
+                     />
+                  </div>
+                  <div className="form-control">
+                     <label htmlFor="confirmPassword">
+                        Confirm password<span>*</span>
+                     </label>
+                     <input
+                        type="password"
+                        name="confirmPassword"
+                        id="confirmPassword"
+                        className={error && error.includes("Password") ? "error" : ""}
+                        value={formState.confirmPassword}
+                        onChange={handleFormChange}
+                        required
+                     />
+                  </div>
                </div>
 
                {error && <p className="text-error">{error}</p>}
