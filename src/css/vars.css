@@ -18,6 +18,15 @@
    --error-border: hsl(0, 85%, 35%);
    --error-outline: hsla(0, 85%, 35%, 15%);
 
+   --budget-red: hsl(0, 69%, 55%);
+   --budget-red-dim: hsl(0, 69%, 90%);
+   --budget-green: hsl(133, 44%, 47%);
+   --budget-green-dim: hsl(133, 44%, 90%);
+   --budget-teal: hsl(180, 50%, 35%);
+   --budget-teal-dim: hsl(180, 50%, 90%);
+   --budget-blue: hsl(203, 44%, 47%);
+   --budget-blue-dim: hsl(203, 44%, 90%);
+
    --heading-text: light-dark(hsl(240, 25%, 20%), #fff);
    --body-text: light-dark(hsl(240, 20%, 30%), #fff);
    --label-text: light-dark(hsl(240, 20%, 60%), #fff);

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { Logo_Lettermark } from "../icons";
 
 import "@/css/components/nav.css";
+import { logout } from "@/actions/auth";
 
 export default function Nav() {
    const path = usePathname();
@@ -32,9 +33,9 @@ export default function Nav() {
          </div>
          <ul className="app-nav-actions" role="list">
             <li>
-               <Link href="/account" className="btn outline">
-                  Account
-               </Link>
+               <button onClick={logout} className="outline">
+                  Log out
+               </button>
             </li>
             <li>
                <Link href="/" className="btn">

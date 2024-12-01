@@ -1,4 +1,6 @@
 import { Metadata } from "next";
+import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
    title: "PennyWise",
@@ -6,10 +8,11 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+   redirect("/app");
+
    return (
       <>
-         <h1>Hello, World</h1>
-         <p>This is PennyWise</p>
+         <Link href="/app">Go to App</Link>
       </>
    );
 }

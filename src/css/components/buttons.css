@@ -49,7 +49,7 @@ button,
       --_background: transparent;
       --_background-hover: var(--background-2);
       --_background-active: var(--background-3);
-      --_border: var(--border-1);
-      --_border-hover: var(--border-2);
+      --_border: var(--theme);
+      --_border-hover: var(--theme-bright);
    }
 }

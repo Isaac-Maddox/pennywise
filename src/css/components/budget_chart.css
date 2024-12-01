@@ -1,0 +1,34 @@
+.budget-chart {
+   --_color: var(--theme);
+
+   width: 20rem;
+   aspect-ratio: 1;
+   border-radius: 50%;
+   background-image: conic-gradient(var(--_color) 180deg, var(--background-1) 180deg);
+   display: grid;
+   place-content: center;
+
+   .category-percent {
+      color: var(--_color);
+   }
+
+   &.color-red {
+      --_color: var(--budget-red);
+      --_dim: var(--budget-red-dim);
+   }
+
+   &.color-green {
+      --_color: var(--budget-green);
+      --_dim: var(--budget-green-dim);
+   }
+
+   &.color-teal {
+      --_color: var(--budget-teal);
+      --_dim: var(--budget-teal-dim);
+   }
+
+   &.color-blue {
+      --_color: var(--budget-blue);
+      --_dim: var(--budget-blue-dim);
+   }
+}
