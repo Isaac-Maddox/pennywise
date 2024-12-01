@@ -52,4 +52,10 @@
    .app-nav-actions {
       gap: 0.5em;
    }
+
+   @media (width < 1024px) {
+      .app-nav-links {
+         display: none;
+      }
+   }
 }

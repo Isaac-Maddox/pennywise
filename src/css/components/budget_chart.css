@@ -20,14 +20,11 @@
    isolation: isolate;
    position: relative;
    width: 100%;
-   max-width: 30rem;
    aspect-ratio: 1;
    border-radius: 50%;
-   background-image: conic-gradient(
-      var(--_color) var(--_progress),
-      var(--_color-projected) calc(var(--_progress) + min(var(--_progress), 0.25deg)) var(--_projected),
-      var(--_dim) calc(var(--_projected) + min(var(--_progress), 0.25deg))
-   );
+   background-image: conic-gradient(var(--_color) var(--_progress),
+         var(--_color-projected) calc(var(--_progress) + min(var(--_progress), 0.25deg)) var(--_projected),
+         var(--_dim) calc(var(--_projected) + min(var(--_progress), 0.25deg)));
    transition: --_progress 2s ease, --_projected 2s ease;
    display: flex;
    flex-direction: column;
@@ -98,6 +95,7 @@
    from {
       opacity: 0;
    }
+
    to {
       opacity: 1;
    }

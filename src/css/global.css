@@ -152,6 +152,10 @@ a {
    color: var(--error-text);
 }
 
+.text-dim {
+   color: var(--label-text);
+}
+
 ul[role="list"],
 ol[role="list"] {
    list-style: none;

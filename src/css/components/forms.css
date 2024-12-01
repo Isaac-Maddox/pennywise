@@ -37,7 +37,7 @@ form {
       }
    }
 
-   &:not(:has(.error)):focus-within label {
+   &:not(:has(.error, input[type="checkbox"])):focus-within label {
       color: var(--theme);
    }
 
@@ -66,15 +66,19 @@ form {
             justify-content: center;
             background-color: transparent;
             transition: background-color 150ms ease, border 150ms ease, outline 150ms ease;
+            background-color: var(--background-1);
          }
 
-         &:has(:checked)::before {
-            background-color: var(--theme);
-            border-color: var(--theme);
-            background-image: url("../../../public/check_mark.svg");
-            background-size: 60%;
-            background-position: center;
-            background-repeat: no-repeat;
+         &:has(:checked) {
+            color: var(--theme);
+
+            &::before {
+               background-color: var(--theme);
+               border-color: var(--theme);
+               background-image: url("../../../public/check_mark.svg");
+               background-position: center;
+               background-repeat: no-repeat;
+            }
          }
       }
 

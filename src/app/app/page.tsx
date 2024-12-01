@@ -16,7 +16,7 @@ export default async function AppHome() {
 
    return (
       <>
-         <Suspense fallback={<p>loading</p>}>
+         <Suspense fallback={<p>Loading...</p>}>
             <DashboardPage user={user} />
          </Suspense>
       </>
