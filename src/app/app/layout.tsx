@@ -4,6 +4,11 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 import "@/css/pages/app.css";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+   title: "Dashboard | Pennywise",
+};
 
 export default async function AppLayout({ children }: { children: React.ReactNode[] }) {
    const cookieStore = await cookies();

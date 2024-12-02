@@ -12,7 +12,7 @@
 .callout-card {
    background-color: var(--theme);
    height: 100%;
-   padding: max(2em, 7.5vw);
+   padding: max(2em, 4.5vw);
    align-content: center;
 
    h1 {
