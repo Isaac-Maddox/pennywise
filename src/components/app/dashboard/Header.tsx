@@ -1,7 +1,7 @@
 import { CategoryWithTransactions } from "@/types";
-import BudgetChart from "../BudgetChart";
-import { Category, User } from "@prisma/client";
+import { User } from "@prisma/client";
 import Link from "next/link";
+import BudgetChart from "../BudgetChart";
 
 export default async function Header({ user, categories }: HeaderProps) {
    let totalSpent = 0;
@@ -47,7 +47,7 @@ export default async function Header({ user, categories }: HeaderProps) {
                </>
             ) : (
                <>
-                  <p className="text-lg">Welcome to Pennywise! Let's get you set up</p>
+                  <p className="text-lg">Welcome to Pennywise! Let&apos;s get you set up</p>
                   <button className="outline">Get started</button>
                </>
             )}
@@ -60,7 +60,7 @@ export default async function Header({ user, categories }: HeaderProps) {
          ) : (
             <div className="header-cta">
                <p className="text-dim">
-                  It seems like you don't have a budget set up yet. <Link href="/">Let's get started!</Link>
+                  It seems like you don&apos;t have a budget set up yet. <Link href="/">Let&apos;s get started!</Link>
                </p>
             </div>
          )}

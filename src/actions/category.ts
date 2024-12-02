@@ -41,8 +41,7 @@ export async function createCategory(data: Pick<Category, "name" | "budget">): P
          success: true,
          data: newCategory,
       };
-   } catch (error) {
-      console.log(error);
+   } catch {
       return {
          success: false,
          message: `Category already exists`,
@@ -88,7 +87,7 @@ export async function getAllCategories(): Promise<ActionResponse<CategoryWithTra
          success: true,
          data: categories,
       };
-   } catch (error) {
+   } catch {
       return {
          success: false,
          message: `Internal Server Error`,

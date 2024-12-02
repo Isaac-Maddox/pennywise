@@ -1,11 +1,10 @@
 "use client";
 
 import { login } from "@/actions/auth";
+import { Outline } from "@/components/icons";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { Outline } from "@/components/icons";
-import { Metadata } from "next";
 
 const initialFormState: LoginFormState = {
    email: "",

@@ -21,7 +21,7 @@ export default function BudgetChart({ size = "small", color = "theme", budget, m
             chartElement.current?.style.setProperty("--_projected", `${gradientDegrees * 3.6 * multiplier}deg`);
          }
       }, 1);
-   }, [chartElement]);
+   }, [chartElement, gradientDegrees, multiplier]);
 
    return (
       <div ref={chartElement} className={`budget-chart color-${color} chart-${size} ${overBudget ? "over-budget" : ""}`}>
