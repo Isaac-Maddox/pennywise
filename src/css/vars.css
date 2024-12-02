@@ -25,7 +25,7 @@
    --budget-red-projected: hsl(0, 69%, 80%);
    --budget-red-dim: hsl(0, 69%, 90%);
    --budget-green: hsl(133, 44%, 47%);
-   --budget-green-projected: hsl(133, 44%, 60%);
+   --budget-green-projected: hsl(133, 44%, 70%);
    --budget-green-dim: hsl(133, 44%, 90%);
    --budget-teal: hsl(180, 50%, 35%);
    --budget-teal-projected: hsl(180, 50%, 50%);
@@ -101,7 +101,8 @@
 
    --fw-strong: 700;
 
-   --z-nav: 2;
+   --z-nav: 1;
+   --z-loading: 1;
 
    @media (width < 1024px) {
       --page-padding: 1.5rem;

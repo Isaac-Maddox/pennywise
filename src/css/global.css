@@ -177,3 +177,37 @@ strong,
    padding: 0;
    border: 0;
 }
+
+.loading-page {
+   position: fixed;
+   z-index: var(--z-loading);
+   inset: 0;
+   display: grid;
+   align-content: center;
+   justify-content: center;
+
+   @supports (position-anchor: --nav-anchor) {
+      position-anchor: --nav-anchor;
+      top: anchor(bottom);
+      inset-block-end: 0;
+      inset-inline: 0;
+   }
+
+   svg {
+      animation: bounce 2s ease infinite;
+   }
+
+   p {
+      text-align: center;
+   }
+}
+
+@keyframes bounce {
+   50% {
+      transform: translateY(-20%);
+   }
+
+   to {
+      transform: translateY(0);
+   }
+}

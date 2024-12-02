@@ -46,7 +46,6 @@ model Category {
   name         String
   budget       Int
   color        String        @default("blue")
-  disabled     Boolean       @default(false)
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
   userId       Int

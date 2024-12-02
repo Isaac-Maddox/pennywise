@@ -37,6 +37,7 @@ export async function createCategory(data: Pick<Category, "name" | "budget">): P
             },
          },
       });
+
       return {
          success: true,
          data: newCategory,

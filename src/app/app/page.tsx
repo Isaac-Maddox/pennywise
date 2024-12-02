@@ -4,6 +4,7 @@ import { User } from "@prisma/client";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import DashboardPage from "@/components/app/dashboard/DashboardPage";
+import Loading from "@/components/Loading";
 
 export default async function AppHome() {
    const cookieStore = await cookies();
@@ -16,7 +17,7 @@ export default async function AppHome() {
 
    return (
       <>
-         <Suspense fallback={<p>Loading...</p>}>
+         <Suspense fallback={<Loading />}>
             <DashboardPage user={user} />
          </Suspense>
       </>

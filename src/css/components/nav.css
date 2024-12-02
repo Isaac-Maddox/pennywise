@@ -10,6 +10,7 @@
    padding-inline: calc((100% - var(--content-width-md)) / 2);
    background-color: var(--background-1);
    z-index: var(--z-nav);
+   anchor-name: --nav-anchor;
 
    .app-nav-left {
       display: flex;

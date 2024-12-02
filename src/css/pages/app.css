@@ -25,6 +25,11 @@ header {
 
       :first-child {
          justify-self: end;
+
+         @media (width < 800px) {
+            justify-self: center;
+            max-width: 40ch;
+         }
       }
 
       @media (width >=800px) {
@@ -48,7 +53,7 @@ header {
          grid-template-columns: 1fr;
          grid-template-rows: auto;
 
-         &> :not(:first-child) {
+         & > :not(:first-child) {
             display: none;
          }
       }
@@ -66,7 +71,7 @@ header {
       }
    }
 
-   @media (width < 728px) {
+   @media (width < 800px) {
       gap: 1.5em;
 
       .header-greeting {
