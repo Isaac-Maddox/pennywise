@@ -8,12 +8,13 @@ import Loading from "@/components/Loading";
 
 export default async function AppHome() {
    const cookieStore = await cookies();
-   const token = cookieStore.get("usrjwt")!.value;
-   const user = jwt.decode(token) as User;
+   const token = cookieStore.get("usrjwt")?.value;
 
-   if (!user) {
-      redirect("/login");
+   if (!token) {
+      return <h1>Unauthorized</h1>;
    }
+
+   const user = jwt.decode(token) as User;
 
    return (
       <>
