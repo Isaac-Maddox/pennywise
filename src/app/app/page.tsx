@@ -1,7 +1,6 @@
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 import { User } from "@prisma/client";
-import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import DashboardPage from "@/components/app/dashboard/DashboardPage";
 import Loading from "@/components/Loading";
