@@ -44,7 +44,7 @@
    --text-on-theme: light-dark(hsl(240, 74%, 85%), #fff);
 
    --page-padding: 3rem;
-   --content-width-md: min(100% - var(--page-padding), 90rem);
+   --content-width-md: min(100% - (var(--page-padding) * 2), 90rem);
 
    --ff-heading: "Sora", serif;
    --ff-body: "Onest", sans-serif;
