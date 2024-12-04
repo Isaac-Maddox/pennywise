@@ -27,6 +27,24 @@ export default function Overview({ user, categories }: OverviewProps) {
          name: "Groceries for the week",
          amount: "$33.72",
       },
+      {
+         date: "11/23",
+         category: "Groceries",
+         name: "Groceries for the week",
+         amount: "$33.72",
+      },
+      {
+         date: "11/23",
+         category: "Groceries",
+         name: "Groceries for the week",
+         amount: "$33.72",
+      },
+      {
+         date: "11/23",
+         category: "Groceries",
+         name: "Groceries for the week",
+         amount: "$33.72",
+      },
    ];
 
    return (
@@ -36,7 +54,7 @@ export default function Overview({ user, categories }: OverviewProps) {
             description="Your most recent transactions"
             // link={{ text: "See all for November", href: "/transactions" }}>
          >
-            <DividedList headers={headers} data={data} rows="all" />
+            <DividedList data={data} rows={5} />
          </Card>
          <Card
             title="My Budget"
