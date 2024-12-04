@@ -3,7 +3,7 @@
 import { signup } from "@/actions/auth";
 import { Outline } from "@/components/icons";
 import Link from "next/link";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
 
 const initialFormState: SignupFormState = {
@@ -49,7 +49,7 @@ export default function SignupPage() {
          } else {
             setError(message);
          }
-      } catch (error) {
+      } catch {
          setError("We're having problems... Try again in a bit!");
       } finally {
          setIsProcessing(false);
