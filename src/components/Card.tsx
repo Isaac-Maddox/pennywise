@@ -7,10 +7,8 @@ export default function Card({ title, description, link, children }: CardProps) 
    return (
       <div className="card">
          <div className="card-header">
-            <div>
-               <p className="text-h2">{title}</p>
-               {description ? <p className="text-lg">{description}</p> : ""}
-            </div>
+            <h2>{title}</h2>
+            {description ? <p className="text-lg description">{description}</p> : ""}
             {link ? <Link href={link.href}>{link.text}</Link> : ""}
          </div>
          <div className="card-body">{children}</div>

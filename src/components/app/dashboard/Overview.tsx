@@ -34,7 +34,8 @@ export default function Overview({ user, categories }: OverviewProps) {
          <Card
             title="My Transactions"
             description="Your most recent transactions"
-            link={{ text: "See all for November", href: "/transactions" }}>
+            // link={{ text: "See all for November", href: "/transactions" }}>
+         >
             <DividedList headers={headers} data={data} rows="all" />
          </Card>
          <Card
