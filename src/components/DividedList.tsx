@@ -2,7 +2,7 @@ import "@/css/components/divided_list.css";
 import { fromKebabCase } from "@/utils/string";
 
 export default function DividedList({ data, rows, total = {} }: DividedListProps) {
-   const headers = Object.keys(data[0]) as (keyof (typeof data)[number])[];
+   const headers = Object.keys(data[0]);
 
    return (
       <div className="table-wrapper">
@@ -32,7 +32,7 @@ export default function DividedList({ data, rows, total = {} }: DividedListProps
                      <td>Total</td>
                      {headers.map((title, i) => {
                         if (i === 0) return null;
-                        return total?.[title] ? <td key={i}>{total[title]}</td> : <td key={i} />;
+                        return total[title] ? <td key={i}>{total[title]}</td> : <td key={i} />;
                      })}
                   </tr>
                )}
@@ -44,10 +44,10 @@ export default function DividedList({ data, rows, total = {} }: DividedListProps
 
 interface DividedListProps<Data = object> {
    data: {
-      [key in keyof Data]: any;
+      [key: string]: any;
    }[];
    rows?: number;
    total?: {
-      [key in keyof Data]: any;
+      [key: string]: any;
    };
 }
