@@ -4,22 +4,35 @@ export default function DividedList({ data, rows, headers, total }: DividedListP
    const headerElements = [];
    const dataElements = [];
 
-   if (headers) {
+   if (!rows) rows = Infinity;
+   for (let i = 0; i < data.length && i < rows; i++) {
+      let elements = [];
+
       for (const str of headers) {
-         headerElements.push(<th>{str}</th>);
+         elements.push(<td>{data[i][str] ? data[i][str] : "--"}</td>);
       }
 
-      for (const obj of data) {
-         dataElements.push(
-            Object.entries(obj).map((entry) => {
-               if (headers.includes(entry[0])) {
-                  return <td>{entry[1]}</td>;
-               }
-            })
-         );
-      }
-   } else {
+      dataElements.push(elements);
    }
+
+   if (dataElements.length === rows) {
+      dataElements.pop();
+      dataElements.push(
+         <td colSpan={headers.length} className="text-dim">{`And ${data.length - rows + 1} more...`}</td>
+      );
+   }
+
+   let elements = [];
+   elements.push(<th>Total</th>);
+   for (const str of headers) {
+      headerElements.push(<th>{str}</th>);
+
+      if (total) elements.push(<th>{total[str] ? total[str] : ""}</th>);
+   }
+   let last = elements.pop();
+   elements.pop();
+   elements.push(last);
+   dataElements.push(elements);
 
    return (
       <div className="table-wrapper">
@@ -43,7 +56,7 @@ export default function DividedList({ data, rows, headers, total }: DividedListP
 
 interface DividedListProps {
    data: object[];
-   rows: number | "all";
-   headers?: string[];
-   total?: boolean | string[];
+   rows?: number;
+   headers: object[];
+   total?: object;
 }
