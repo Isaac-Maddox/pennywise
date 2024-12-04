@@ -16,8 +16,8 @@ export default function DividedList({ data, rows, total }: DividedListProps) {
                {data.map((row, i) => {
                   return rows && i > rows - 1 ? null : (
                      <tr key={i}>
-                        {headers.map((title) => {
-                           return <td>{row[title]}</td>;
+                        {headers.map((title, j) => {
+                           return <td key={j}>{row[title]}</td>;
                         })}
                      </tr>
                   );
