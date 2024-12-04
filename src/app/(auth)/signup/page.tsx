@@ -15,12 +15,15 @@ const initialFormState: SignupFormState = {
 };
 
 export default function SignupPage() {
+   document.title = "Sign up | Pennywise";
+
    const [formState, setFormState] = useState<SignupFormState>(initialFormState);
    const [isProcessing, setIsProcessing] = useState(false);
    const [error, setError] = useState("");
    const router = useRouter();
 
    const handleFormChange = (e: ChangeEvent<HTMLInputElement>) => {
+      setError("");
       setFormState((old) => {
          return {
             ...old,

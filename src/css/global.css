@@ -100,7 +100,7 @@ p,
    letter-spacing: var(--ls-md);
    color: var(--body-text);
 
-   &:has(+ :is(p, .text-md)) {
+   &:has(+ :is(p, .text-md, a)) {
       margin-block-end: 1em;
    }
 }
@@ -210,4 +210,24 @@ strong,
    to {
       transform: translateY(0);
    }
+}
+
+img.not_found {
+   position: fixed;
+   inset: 0;
+   margin: auto;
+   max-width: unset;
+   min-width: 75%;
+   min-height: 20rem;
+   mask-image: radial-gradient(black 50%, transparent);
+   z-index: -1;
+   height: unset;
+   width: unset;
+}
+
+.not_found_content {
+   position: fixed;
+   inset: 0;
+   display: grid;
+   place-content: center;
 }

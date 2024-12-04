@@ -54,10 +54,13 @@
          inset-inline-end: 0;
          background: var(--background-1);
          flex-direction: column;
+         gap: 2em;
          padding: var(--page-padding);
          transition: opacity 150ms ease;
          opacity: 0;
          pointer-events: none;
+         overflow: auto;
+         overscroll-behavior: contain;
 
          &:is(.drawer-open .app-nav-drawer-wrapper) {
             opacity: 1;

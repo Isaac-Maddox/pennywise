@@ -13,6 +13,8 @@ const initialFormState: LoginFormState = {
 };
 
 export default function LoginPage() {
+   document.title = "Login | Pennywise";
+
    const [formState, setFormState] = useState<LoginFormState>(initialFormState);
    const [isProcessing, setIsProcessing] = useState(false);
    const [error, setError] = useState("");
@@ -35,6 +37,8 @@ export default function LoginPage() {
    };
 
    const updateFormState = (e: ChangeEvent<HTMLInputElement>) => {
+      setError("");
+
       setFormState((old) => {
          return {
             ...old,
