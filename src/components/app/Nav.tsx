@@ -2,20 +2,27 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Logo_Lettermark } from "../icons";
+import { Hamburger, Logo_Lettermark, X } from "../icons";
 
 import "@/css/components/nav.css";
 import { logout } from "@/actions/auth";
+import { useEffect, useState } from "react";
 
 export default function Nav() {
    const path = usePathname();
+   const [isOpen, setIsOpen] = useState(false);
+   const pathname = usePathname();
 
    const year = new Date().getFullYear();
 
+   useEffect(() => {
+      setIsOpen(false);
+   }, [pathname]);
+
    return (
-      <nav className="app-nav">
-         <div className="app-nav-left">
-            <Logo_Lettermark />
+      <nav className={`app-nav${isOpen ? " drawer-open" : ""}`}>
+         <Logo_Lettermark />
+         <div className="app-nav-drawer-wrapper">
             <ul className="app-nav-links" role="list">
                <NavLink href="/app" path={path}>
                   Dashboard
@@ -30,19 +37,23 @@ export default function Nav() {
                   My {year} Recap
                </NavLink>
             </ul>
+            <ul className="app-nav-actions" role="list">
+               <li>
+                  <button onClick={logout} className="outline">
+                     Log out
+                  </button>
+               </li>
+               <li>
+                  <Link href="/" className="btn">
+                     Transaction
+                  </Link>
+               </li>
+            </ul>
          </div>
-         <ul className="app-nav-actions" role="list">
-            <li>
-               <button onClick={logout} className="outline">
-                  Log out
-               </button>
-            </li>
-            <li>
-               <Link href="/" className="btn">
-                  Transaction
-               </Link>
-            </li>
-         </ul>
+         <button className="app-nav-drawer-toggle icon" onClick={() => setIsOpen(!isOpen)}>
+            <span className="visually-hidden">Toggle Nav Drawer</span>
+            {isOpen ? <X /> : <Hamburger />}
+         </button>
       </nav>
    );
 }
