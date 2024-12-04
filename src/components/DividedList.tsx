@@ -1,7 +1,7 @@
 import "@/css/components/divided_list.css";
 import { fromKebabCase } from "@/utils/string";
 
-export default function DividedList({ data, rows, total }: DividedListProps) {
+export default function DividedList({ data, rows, total = {} }: DividedListProps) {
    const headers = Object.keys(data[0]) as (keyof (typeof data)[number])[];
 
    return (
@@ -22,14 +22,27 @@ export default function DividedList({ data, rows, total }: DividedListProps) {
                      </tr>
                   );
                })}
+               {Object.keys(total).length && (
+                  <tr>
+                     <td>Total</td>
+                     {headers.map((title, i) => {
+                        if (i === 0) return null;
+                        return total?.[title] ? <td key={i}>{total[title]}</td> : <td />;
+                     })}
+                  </tr>
+               )}
             </tbody>
          </table>
       </div>
    );
 }
 
-interface DividedListProps {
-   data: object[];
+interface DividedListProps<Data = object> {
+   data: {
+      [key in keyof Data]: any;
+   }[];
    rows?: number;
-   total?: boolean | string[];
+   total?: {
+      [key in keyof Data]: any;
+   };
 }

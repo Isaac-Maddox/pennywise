@@ -28,6 +28,10 @@ export default function Overview({ user, categories }: OverviewProps) {
          amount: "$33.72",
       },
    ];
+   const total = {
+      amount: "$150.00",
+      name: "Name",
+   };
 
    return (
       <div className="overview">
@@ -36,12 +40,9 @@ export default function Overview({ user, categories }: OverviewProps) {
             description="Your most recent transactions"
             // link={{ text: "See all for November", href: "/transactions" }}>
          >
-            <DividedList headers={headers} data={data} rows="all" />
+            <DividedList data={data} total={total} />
          </Card>
-         <Card
-            title="My Budget"
-            description="How you're doing this month"
-            link={{ text: "Edit budget", href: "/budget" }}>
+         <Card title="My Budget" description="How you're doing this month" link={{ text: "Edit budget", href: "/budget" }}>
             Budget list here
          </Card>
       </div>
