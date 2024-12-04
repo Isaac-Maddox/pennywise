@@ -22,12 +22,17 @@ export default function DividedList({ data, rows, total = {} }: DividedListProps
                      </tr>
                   );
                })}
+               {rows && data.length > rows && (
+                  <tr>
+                     <td colSpan={headers.length}>And {data.length - rows} more...</td>
+                  </tr>
+               )}
                {Object.keys(total).length && (
                   <tr>
                      <td>Total</td>
                      {headers.map((title, i) => {
                         if (i === 0) return null;
-                        return total?.[title] ? <td key={i}>{total[title]}</td> : <td />;
+                        return total?.[title] ? <td key={i}>{total[title]}</td> : <td key={i} />;
                      })}
                   </tr>
                )}

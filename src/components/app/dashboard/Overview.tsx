@@ -40,7 +40,7 @@ export default function Overview({ user, categories }: OverviewProps) {
             description="Your most recent transactions"
             // link={{ text: "See all for November", href: "/transactions" }}>
          >
-            <DividedList data={data} total={total} />
+            <DividedList data={data} total={total} rows={1} />
          </Card>
          <Card title="My Budget" description="How you're doing this month" link={{ text: "Edit budget", href: "/budget" }}>
             Budget list here
