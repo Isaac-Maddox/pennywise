@@ -3,7 +3,7 @@
 import { login } from "@/actions/auth";
 import { Outline } from "@/components/icons";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
 
 const initialFormState: LoginFormState = {
@@ -16,6 +16,7 @@ export default function LoginPage() {
    const [formState, setFormState] = useState<LoginFormState>(initialFormState);
    const [isProcessing, setIsProcessing] = useState(false);
    const [error, setError] = useState("");
+   const router = useRouter();
 
    const submitForm = async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -25,7 +26,7 @@ export default function LoginPage() {
       const { success, message } = await login(formState);
 
       if (success) {
-         redirect("/app");
+         router.push("/app");
       } else {
          setError(message);
       }
