@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import BackLink from "./BackLink";
 
 export const metadata: Metadata = {
    title: "404 | Pennywise",
@@ -14,7 +15,7 @@ export default function NotFound() {
             <h1>Page not found</h1>
             <p className="text-lg">We couldn&apos;t find what you were looking for.</p>
             <p>
-               You can <Link href="javascript:history.back()">go back</Link> or <Link href="/app">go to your dashboard</Link>.
+               You can <BackLink>go back</BackLink> or <Link href="/app">go to your dashboard</Link>.
             </p>
          </div>
       </>
