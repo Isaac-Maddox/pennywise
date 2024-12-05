@@ -75,7 +75,7 @@ form {
             &::before {
                background-color: var(--theme);
                border-color: var(--theme);
-               background-image: url("../../../public/check_mark.svg");
+               background-image: url("/check_mark.svg");
                background-position: center;
                background-repeat: no-repeat;
             }

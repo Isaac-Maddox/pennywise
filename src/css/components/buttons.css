@@ -7,9 +7,12 @@ button,
    --_focus-outline: var(--focused-outline);
    --_border: var(--theme);
    --_border-hover: var(--theme-bright);
+   --_border-radius: .5em;
    --_color: var(--heading-on-theme);
+   --_padding-x: 1em;
+   --_padding-y: .875em;
 
-   padding: 0.875em 1em;
+   padding: var(--_padding-y) var(--_padding-x);
    background-color: var(--_background);
    border: 1px solid var(--_border);
    color: var(--_color);
@@ -18,7 +21,7 @@ button,
    align-items: center;
    justify-content: center;
    cursor: pointer;
-   border-radius: 0.5em;
+   border-radius: var(--_border-radius);
    outline: 3px solid transparent;
    outline-offset: 0px;
    transition: 150ms ease;
@@ -44,6 +47,24 @@ button,
       background-color: var(--_background-disabled);
    }
 
+   svg {
+      max-width: 1.5em;
+      max-height: 1.5em;
+
+      &.x-icon {
+         max-width: 1em;
+         max-height: 1em;
+      }
+
+      [fill] {
+         fill: currentColor;
+      }
+
+      [stroke] {
+         stroke: currentColor;
+      }
+   }
+
    &.outline {
       --_color: var(--theme);
       --_background: transparent;
@@ -51,5 +72,24 @@ button,
       --_background-active: var(--background-3);
       --_border: var(--theme);
       --_border-hover: var(--theme-bright);
+   }
+
+   &.icon {
+      --_color: var(--heading-text);
+      --_background: transparent;
+      --_background-hover: var(--background-2);
+      --_background-active: var(--background-3);
+      --_border: var(--border-1);
+      --_border-hover: var(--border-2);
+      --_padding-x: .875em;
+      --_padding-y: .875em;
+      --_border-radius: 50%;
+      aspect-ratio: 1;
+      height: 50px;
+
+      svg {
+         height: auto;
+         width: 1.25em;
+      }
    }
 }
