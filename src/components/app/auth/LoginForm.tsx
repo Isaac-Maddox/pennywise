@@ -33,7 +33,7 @@ export default function LoginForm() {
       setIsProcessing(false);
    };
 
-   const updateFormState = (e: ChangeEvent<HTMLInputElement>) => {
+   const handleFormChange = (e: ChangeEvent<HTMLInputElement>) => {
       setError("");
 
       setFormState((old) => {
@@ -51,17 +51,17 @@ export default function LoginForm() {
             <label htmlFor="email">
                Email<span>*</span>
             </label>
-            <input type="email" name="email" id="email" className={error ? "error" : ""} value={formState.email} onChange={updateFormState} required />
+            <input type="email" name="email" id="email" className={error ? "error" : ""} value={formState.email} onChange={handleFormChange} required autoFocus />
          </div>
          <div className="form-control">
             <label htmlFor="password">
                Password<span>*</span>
             </label>
-            <input type="password" name="password" id="password" className={error ? "error" : ""} value={formState.password} onChange={updateFormState} required />
+            <input type="password" name="password" id="password" className={error ? "error" : ""} value={formState.password} onChange={handleFormChange} required />
          </div>
          <div className="form-control">
             <label htmlFor="remember">
-               <input type="checkbox" name="remember" id="remember" checked={formState.remember} onChange={updateFormState} /> Remember me
+               <input type="checkbox" name="remember" id="remember" checked={formState.remember} onChange={handleFormChange} /> Remember me
             </label>
          </div>
          {error && <p className="text-error">{error}</p>}
