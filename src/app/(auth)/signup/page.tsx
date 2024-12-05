@@ -3,7 +3,7 @@
 import { signup } from "@/actions/auth";
 import { Outline } from "@/components/icons";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
 
 const initialFormState: SignupFormState = {
@@ -15,11 +15,15 @@ const initialFormState: SignupFormState = {
 };
 
 export default function SignupPage() {
+   document.title = "Sign up | Pennywise";
+
    const [formState, setFormState] = useState<SignupFormState>(initialFormState);
    const [isProcessing, setIsProcessing] = useState(false);
    const [error, setError] = useState("");
+   const router = useRouter();
 
    const handleFormChange = (e: ChangeEvent<HTMLInputElement>) => {
+      setError("");
       setFormState((old) => {
          return {
             ...old,
@@ -44,13 +48,12 @@ export default function SignupPage() {
          const { success, message } = await signup(formState);
 
          if (success) {
-            redirect("/login");
+            router.push("/login");
          } else {
             setError(message);
          }
-      } catch (error) {
+      } catch {
          setError("We're having problems... Try again in a bit!");
-         console.log(error);
       } finally {
          setIsProcessing(false);
       }
@@ -61,10 +64,7 @@ export default function SignupPage() {
          <aside className="callout-card">
             <Outline />
             <h1>Welcome to Pennywise!</h1>
-            <p className="text-lg">
-               Pennywise helps you get a grip on your finances with handy tools that make it easy to track and manage
-               your monthly spending.
-            </p>
+            <p className="text-lg">Pennywise helps you get a grip on your finances with handy tools that make it easy to track and manage your monthly spending.</p>
          </aside>
          <main>
             <form className="auth-form" action="/signup" method="post" onSubmit={(e) => submitForm(e)}>
@@ -74,16 +74,7 @@ export default function SignupPage() {
                   <label htmlFor="email">
                      Email<span>*</span>
                   </label>
-                  <input
-                     type="email"
-                     name="email"
-                     id="email"
-                     className={error && error.includes("email") ? "error" : ""}
-                     value={formState.email}
-                     onChange={handleFormChange}
-                     required
-                     autoFocus
-                  />
+                  <input type="email" name="email" id="email" className={error && error.includes("email") ? "error" : ""} value={formState.email} onChange={handleFormChange} required autoFocus />
                </div>
 
                <div className="form-group">
@@ -91,27 +82,13 @@ export default function SignupPage() {
                      <label htmlFor="firstName">
                         First name<span>*</span>
                      </label>
-                     <input
-                        type="text"
-                        name="firstName"
-                        id="firstName"
-                        value={formState.firstName}
-                        onChange={handleFormChange}
-                        required
-                     />
+                     <input type="text" name="firstName" id="firstName" value={formState.firstName} onChange={handleFormChange} required />
                   </div>
                   <div className="form-control">
                      <label htmlFor="lastName">
                         Last name<span>*</span>
                      </label>
-                     <input
-                        type="text"
-                        name="lastName"
-                        id="lastName"
-                        value={formState.lastName}
-                        onChange={handleFormChange}
-                        required
-                     />
+                     <input type="text" name="lastName" id="lastName" value={formState.lastName} onChange={handleFormChange} required />
                   </div>
                </div>
 
@@ -120,29 +97,13 @@ export default function SignupPage() {
                      <label htmlFor="password">
                         Password<span>*</span>
                      </label>
-                     <input
-                        type="password"
-                        name="password"
-                        id="password"
-                        className={error && error.includes("Password") ? "error" : ""}
-                        value={formState.password}
-                        onChange={handleFormChange}
-                        required
-                     />
+                     <input type="password" name="password" id="password" className={error && error.includes("Password") ? "error" : ""} value={formState.password} onChange={handleFormChange} required />
                   </div>
                   <div className="form-control">
                      <label htmlFor="confirmPassword">
                         Confirm password<span>*</span>
                      </label>
-                     <input
-                        type="password"
-                        name="confirmPassword"
-                        id="confirmPassword"
-                        className={error && error.includes("Password") ? "error" : ""}
-                        value={formState.confirmPassword}
-                        onChange={handleFormChange}
-                        required
-                     />
+                     <input type="password" name="confirmPassword" id="confirmPassword" className={error && error.includes("Password") ? "error" : ""} value={formState.confirmPassword} onChange={handleFormChange} required />
                   </div>
                </div>
 

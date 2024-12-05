@@ -4,6 +4,7 @@
    --background-1: hsl(0, 0%, 100%);
    --background-2: hsl(0, 0%, 97.5%);
    --background-3: hsl(0, 0%, 95%);
+   --background-backdrop: hsla(0, 0%, 0%, .5);
 
    --border-1: light-dark(hsl(240, 22%, 90%), #fff);
    --border-2: light-dark(hsl(240, 22%, 85%), #fff);
@@ -14,7 +15,7 @@
    --theme-desaturated: hsl(240, 25%, 45%);
 
    --focused-border: var(--theme);
-   --focused-outline: hsla(240, 50%, 35%, 15%);
+   --focused-outline: hsla(240, 65%, 75%, 50%);
    --error-border: hsl(0, 85%, 35%);
    --error-outline: hsla(0, 85%, 35%, 15%);
 
@@ -101,8 +102,9 @@
 
    --fw-strong: 700;
 
-   --z-nav: 1;
+   --z-nav: 2;
    --z-loading: 1;
+   --z-nav-backdrop: 1;
 
    @media (width < 1024px) {
       --page-padding: 1.5rem;
