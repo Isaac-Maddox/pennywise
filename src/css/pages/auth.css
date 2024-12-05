@@ -31,6 +31,6 @@
 
 main {
    align-content: center;
-   background-image: url("../../../public/auth_background.svg");
+   background-image: url("/auth_background.svg");
    padding-block: 3rem;
 }
