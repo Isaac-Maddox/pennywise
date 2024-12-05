@@ -14,6 +14,10 @@ export default function DividedList({ data, rows, total = {} }: DividedListProps
                   })}
                </tr>
                {data.map((row, i) => {
+                  if (rows && rows - 1 === i && data.length > rows) {
+                     console.log("a");
+                     return null;
+                  }
                   return rows && i > rows - 1 ? null : (
                      <tr key={i}>
                         {headers.map((title, j) => {
@@ -24,7 +28,7 @@ export default function DividedList({ data, rows, total = {} }: DividedListProps
                })}
                {rows && data.length > rows && (
                   <tr>
-                     <td colSpan={headers.length}>And {data.length - rows} more...</td>
+                     <td colSpan={headers.length}>And {data.length - rows + 1} more...</td>
                   </tr>
                )}
                {Object.keys(total).length && (
@@ -42,7 +46,7 @@ export default function DividedList({ data, rows, total = {} }: DividedListProps
    );
 }
 
-interface DividedListProps<Data = object> {
+interface DividedListProps {
    data: {
       [key: string]: any;
    }[];

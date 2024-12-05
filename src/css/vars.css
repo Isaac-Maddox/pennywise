@@ -4,7 +4,7 @@
    --background-1: hsl(0, 0%, 100%);
    --background-2: hsl(0, 0%, 97.5%);
    --background-3: hsl(0, 0%, 95%);
-   --background-backdrop: hsla(0, 0%, 0%, .5);
+   --background-backdrop: hsla(0, 0%, 0%, 0.5);
 
    --border-1: light-dark(hsl(240, 22%, 90%), #fff);
    --border-2: light-dark(hsl(240, 22%, 85%), #fff);
@@ -46,6 +46,10 @@
 
    --page-padding: 3rem;
    --content-width-md: min(100% - (var(--page-padding) * 2), 90rem);
+   /*   Breaks
+      tablet: 1024px
+      mobile: 728px
+   */
 
    --ff-heading: "Sora", serif;
    --ff-body: "Onest", sans-serif;

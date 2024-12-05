@@ -55,9 +55,8 @@ export default function Overview({ user, categories }: OverviewProps) {
          <Card
             title="My Transactions"
             description="Your most recent transactions"
-            // link={{ text: "See all for November", href: "/transactions" }}>
-         >
-            <DividedList data={data} total={total} rows={1} />
+            link={{ text: "See all for November", href: "/transactions" }}>
+            <DividedList data={data} total={total} rows={5} />
          </Card>
          <Card
             title="My Budget"
