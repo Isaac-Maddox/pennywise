@@ -100,7 +100,7 @@ p,
    letter-spacing: var(--ls-md);
    color: var(--body-text);
 
-   &:has(+ :is(p, .text-md, a)) {
+   &:has(+ :is(p, .text-md)) {
       margin-block-end: 1em;
    }
 }
