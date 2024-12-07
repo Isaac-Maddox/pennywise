@@ -159,6 +159,7 @@ ol[role="list"] {
 strong,
 .text-strong {
    font-weight: var(--fw-strong);
+   color: var(--heading-text);
 }
 
 .visually-hidden {

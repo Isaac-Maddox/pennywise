@@ -9,11 +9,12 @@
    width: unset;
    max-width: 100%;
    text-align: left;
-   border-collapse: collapse; /* allows the seperating lines */
+   border-collapse: collapse;
+   /* allows the seperating lines */
    border-spacing: 0;
 
-   > *:not(:last-child),
-   > * > tr:not(:last-child) td {
+   >*:not(:last-child),
+   >*>tr:not(:last-child) td {
       border-block-end: 1px solid var(--border-1);
    }
 
@@ -27,6 +28,24 @@
 
       &:last-child {
          padding-inline-end: 0;
+      }
+   }
+
+   tr:not(.text-strong) {
+      td {
+         color: var(--body-text);
+      }
+
+      th {
+         color: var(--heading-text);
+      }
+   }
+
+   tr.text-strong {
+
+      td,
+      th {
+         color: var(--heading-text);
       }
    }
 

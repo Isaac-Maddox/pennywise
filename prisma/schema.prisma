@@ -48,10 +48,9 @@ model Category {
    budget       Int
    color        String        @default("blue")
    createdAt    DateTime      @default(now())
+   deletedAt DateTime?
    updatedAt    DateTime      @updatedAt
    userId       Int
    user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
    transactions Transaction[]
-
-   @@unique([name, userId]) // Don't allow duplicate names per user
 }

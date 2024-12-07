@@ -35,7 +35,7 @@ export default function DividedList({ fallback, data, rows, total = {}, dashes }
                      <td colSpan={headers.length}>And {data.length - rows + 1} more...</td>
                   </tr>
                )}
-               {Object.keys(total).length && (
+               {!!Object.keys(total).length && (
                   <tr className="text-strong">
                      <td>Total</td>
                      {headers.map((title, i) => {

@@ -9,7 +9,7 @@ export async function getTransactions<T extends GetTransactionsOptions>({
    size,
    range,
    category,
-}: T): Promise<ActionResponse<GetTransactionReturnType<T>[]>> {
+}: T): Promise<ActionResponse<GetTransactionsReturnType<T>>> {
    const user = await checkUserExists();
 
    try {
@@ -27,16 +27,16 @@ export async function getTransactions<T extends GetTransactionsOptions>({
          take: size,
          ...(category
             ? {
-                 include: {
-                    category: {
-                       select: {
-                          name: true,
-                       },
-                    },
-                 },
-              }
+               include: {
+                  category: {
+                     select: {
+                        name: true,
+                     },
+                  },
+               },
+            }
             : {}),
-      })) as GetTransactionReturnType<T>[];
+      })) as GetTransactionsReturnType<T>;
 
       return {
          success: true,
@@ -50,11 +50,6 @@ export async function getTransactions<T extends GetTransactionsOptions>({
    }
 }
 
-interface QuickSummary {
-   totalSpent: number;
-   totalBudget: number;
-}
-
 interface GetTransactionsOptions {
    size?: number;
    range?: {
@@ -64,6 +59,6 @@ interface GetTransactionsOptions {
    category?: boolean;
 }
 
-type GetTransactionReturnType<T extends GetTransactionsOptions> = T["category"] extends true
-   ? TransactionWithCategoryName
-   : Transaction;
+type GetTransactionsReturnType<T extends GetTransactionsOptions> = T["category"] extends true
+   ? TransactionWithCategoryName[]
+   : Transaction[];

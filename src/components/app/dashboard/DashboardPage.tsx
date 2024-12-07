@@ -4,24 +4,24 @@ import "@/css/pages/dashboard.css";
 import { SafeUser } from "@/types";
 import { getCategoryData } from "@/actions/category";
 import { Suspense } from "react";
+import { getStartOfMonth } from "@/utils/date";
+import { redirect } from "next/navigation";
 
 export default async function DashboardPage({ user }: DashboardPageProps) {
-   const now = new Date();
-   const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+   const startOfMonth = getStartOfMonth();
 
    const { success, data: categories } = await getCategoryData({ transactions: true, range: { from: startOfMonth } });
 
    if (!success) {
-      return <h1>Error</h1>;
+      redirect("/error");
    }
 
    return (
       <div className="dashboard">
          <Header user={user} categories={categories} />
          <Suspense fallback={<></>}>
-            <Overview user={user} categories={categories} />
+            <Overview categories={categories} />
          </Suspense>
-         <div style={{ height: "200vh" }}></div>
       </div>
    );
 }

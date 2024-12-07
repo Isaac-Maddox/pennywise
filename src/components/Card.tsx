@@ -18,7 +18,7 @@ export default function Card({ title, description, link, children }: CardProps) 
 
 interface CardProps {
    title: string;
-   children: React.ReactNode;
+   children?: React.ReactNode;
    description?: string;
    link?: {
       text: string;
