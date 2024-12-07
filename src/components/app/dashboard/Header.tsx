@@ -1,5 +1,4 @@
-import { CategoryWithTransactions } from "@/types";
-import { User } from "@prisma/client";
+import { CategoryWithTransactions, SafeUser } from "@/types";
 import Link from "next/link";
 import BudgetChart from "../BudgetChart";
 
@@ -25,7 +24,17 @@ export default async function Header({ user, categories }: HeaderProps) {
       totalSpent += categoryTotal;
       totalBudget += category.budget;
 
-      if (categoryElements.length < 4) categoryElements.push(<BudgetChart key={category.id} name={category.name} amount={categoryTotal} multiplier={multiplier} budget={category.budget} color={category.color} />);
+      if (categoryElements.length < 4)
+         categoryElements.push(
+            <BudgetChart
+               key={category.id}
+               name={category.name}
+               amount={categoryTotal}
+               multiplier={multiplier}
+               budget={category.budget}
+               color={category.color}
+            />
+         );
    }
 
    const daily = totalSpent / Math.max(currentDate - 1, 1);
@@ -40,8 +49,11 @@ export default async function Header({ user, categories }: HeaderProps) {
                <>
                   <p className="text-lg">
                      We&apos;re glad to see you back.
-                     {onTrack ? " You're doing good on your budget this month. " : " You're projected to go over budget this month! "}
-                     There {daysLeft === 1 ? ` is ${daysLeft} more day` : ` are ${daysLeft} more days`} to go and you&apos;ve used {Math.round((totalSpent / totalBudget) * 100)}% of your budget!
+                     {onTrack
+                        ? " You're doing good on your budget this month. "
+                        : " You're projected to go over budget this month! "}
+                     There {daysLeft === 1 ? ` is ${daysLeft} more day` : ` are ${daysLeft} more days`} to go and
+                     you&apos;ve used {Math.round((totalSpent / totalBudget) * 100)}% of your budget!
                   </p>
                   <button className="outline">Budget breakdown</button>
                </>
@@ -54,7 +66,13 @@ export default async function Header({ user, categories }: HeaderProps) {
          </div>
          {hasCategories ? (
             <div className="header-charts">
-               <BudgetChart size="large" name="Total budget" amount={totalSpent} multiplier={multiplier} budget={totalBudget} />
+               <BudgetChart
+                  size="large"
+                  name="Total budget"
+                  amount={totalSpent}
+                  multiplier={multiplier}
+                  budget={totalBudget}
+               />
                {categoryElements}
             </div>
          ) : (
@@ -69,6 +87,6 @@ export default async function Header({ user, categories }: HeaderProps) {
 }
 
 interface HeaderProps {
-   user: User;
+   user: SafeUser;
    categories: CategoryWithTransactions[];
 }

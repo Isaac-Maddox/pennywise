@@ -1,58 +1,51 @@
 "use server";
 
-import { ActionResponse } from "@/types";
+import { ActionResponse, TransactionWithCategoryName } from "@/types";
 import prisma from "@/db";
-import { cookies } from "next/headers";
-import { verifyToken } from "./auth";
-import { redirect } from "next/navigation";
+import { checkUserExists } from "./auth";
+import { Transaction } from "@prisma/client";
 
-export async function getQuickSummary(): Promise<ActionResponse<QuickSummary>> {
-   const cookieStore = await cookies();
-   const token = cookieStore.get("usrjwt")?.value;
-   const user = await verifyToken(token);
-
-   if (!user) {
-      cookieStore.delete("usrjwt");
-      redirect("/login");
-   }
-
-   const now = new Date();
-   const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+export async function getTransactions<T extends GetTransactionsOptions>({
+   size,
+   range,
+   category,
+}: T): Promise<ActionResponse<GetTransactionReturnType<T>[]>> {
+   const user = await checkUserExists();
 
    try {
-      const total = await prisma.transaction.aggregate({
-         _sum: {
-            amount: true,
-         },
+      const transactions = (await prisma.transaction.findMany({
          where: {
             userId: user.id,
             purchasedAt: {
-               gte: startOfMonth,
+               gte: range?.from,
+               lte: range?.to,
             },
          },
-      });
-
-      const totalBudget = await prisma.category.aggregate({
-         _sum: {
-            budget: true,
+         orderBy: {
+            createdAt: "desc",
          },
-         where: {
-            userId: user.id,
-         },
-      });
+         take: size,
+         ...(category
+            ? {
+                 include: {
+                    category: {
+                       select: {
+                          name: true,
+                       },
+                    },
+                 },
+              }
+            : {}),
+      })) as GetTransactionReturnType<T>[];
 
       return {
          success: true,
-         data: {
-            totalSpent: total._sum.amount || 0,
-            totalBudget: totalBudget._sum.budget || 0,
-         },
+         data: transactions,
       };
    } catch (error) {
-      console.log(error);
       return {
          success: false,
-         message: `Category already exists`,
+         message: `Internal Server Error`,
       };
    }
 }
@@ -61,3 +54,16 @@ interface QuickSummary {
    totalSpent: number;
    totalBudget: number;
 }
+
+interface GetTransactionsOptions {
+   size?: number;
+   range?: {
+      from?: Date;
+      to?: Date;
+   };
+   category?: boolean;
+}
+
+type GetTransactionReturnType<T extends GetTransactionsOptions> = T["category"] extends true
+   ? TransactionWithCategoryName
+   : Transaction;

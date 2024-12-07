@@ -1,7 +1,11 @@
 import "@/css/components/divided_list.css";
 import { fromKebabCase } from "@/utils/string";
 
-export default function DividedList({ data, rows, total = {} }: DividedListProps) {
+export default function DividedList({ fallback, data, rows, total = {}, dashes }: DividedListProps) {
+   if (data.length === 0) {
+      return fallback;
+   }
+
    const headers = Object.keys(data[0]);
 
    return (
@@ -21,7 +25,7 @@ export default function DividedList({ data, rows, total = {} }: DividedListProps
                   return rows && i > rows - 1 ? null : (
                      <tr key={i}>
                         {headers.map((title, j) => {
-                           return <td key={j}>{row[title]}</td>;
+                           return !row[title] && dashes ? <td key={j}>--</td> : <td key={j}>{row[title]}</td>;
                         })}
                      </tr>
                   );
@@ -32,7 +36,7 @@ export default function DividedList({ data, rows, total = {} }: DividedListProps
                   </tr>
                )}
                {Object.keys(total).length && (
-                  <tr>
+                  <tr className="text-strong">
                      <td>Total</td>
                      {headers.map((title, i) => {
                         if (i === 0) return null;
@@ -50,8 +54,10 @@ interface DividedListProps {
    data: {
       [key: string]: any;
    }[];
+   fallback?: React.ReactNode;
    rows?: number;
    total?: {
       [key: string]: any;
    };
+   dashes?: boolean;
 }

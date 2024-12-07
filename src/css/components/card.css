@@ -3,11 +3,11 @@
    padding: 2em;
    border-radius: 0.5rem;
    border: 1px solid var(--border-1);
+   min-width: 0;
 
    .card-header {
       display: grid;
       grid-template-columns: 1fr max-content;
-      grid-template-rows: max-content max-content;
 
       h2 {
          grid-column: 1;
@@ -17,6 +17,12 @@
       a {
          grid-column: 2;
          grid-row: 1;
+
+         @media (width < 728px) {
+            margin-top: 0.5em;
+            grid-row: 3;
+            grid-column: 1;
+         }
       }
 
       .description {

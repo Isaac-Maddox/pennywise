@@ -1,4 +1,4 @@
-import { Category, Transaction } from "@prisma/client";
+import { Category, Transaction, User } from "@prisma/client";
 
 export type ActionResponse<Data = any> =
    | {
@@ -15,3 +15,9 @@ export type ActionResponse<Data = any> =
 export type CategoryWithTransactions = Category & {
    transactions: Pick<Transaction, "amount">[];
 };
+
+export type TransactionWithCategoryName = Transaction & {
+   category: Pick<Category, "name">;
+};
+
+export type SafeUser = Omit<User, "salt" | "password">;

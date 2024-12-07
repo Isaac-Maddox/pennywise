@@ -6,8 +6,8 @@
    --background-3: hsl(0, 0%, 95%);
    --background-backdrop: hsla(0, 0%, 0%, 0.5);
 
-   --border-1: light-dark(hsl(240, 22%, 90%), #fff);
-   --border-2: light-dark(hsl(240, 22%, 85%), #fff);
+   --border-1: hsl(240, 22%, 90%);
+   --border-2: hsl(240, 22%, 85%);
 
    --theme: hsl(240, 50%, 35%);
    --theme-bright: hsl(240, 50%, 40%);
