@@ -227,3 +227,7 @@ img.not_found {
    display: grid;
    place-content: center;
 }
+
+.text-center {
+   text-align: center;
+}

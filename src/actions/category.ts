@@ -19,12 +19,6 @@ export async function createCategory(data: Pick<Category, "name" | "budget">): P
    const user = await checkUserExists();
 
    try {
-      // const existingCategory = await prisma.category.findUnique({
-      //    where: {
-      //       userId: user.id, 
-      //    }
-      // })
-
       const newCategory = await prisma.category.create({
          data: {
             ...data,
