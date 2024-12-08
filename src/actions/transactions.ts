@@ -22,7 +22,7 @@ export async function getTransactions<T extends GetTransactionsOptions>({
             },
          },
          orderBy: {
-            createdAt: "desc",
+            purchasedAt: "desc",
          },
          take: size,
          ...(category

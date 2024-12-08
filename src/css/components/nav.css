@@ -24,6 +24,7 @@
       padding-block: 1rem;
       padding-inline: var(--page-padding);
       justify-content: space-between;
+      margin-block-start: 0;
    }
 
    .app-nav-drawer-wrapper {
@@ -59,7 +60,7 @@
          z-index: var(--z-nav-drawer);
          width: 100%;
          inset-block: 0;
-         inset-inline-end: 0;
+         inset-inline: 0px;
          background: var(--background-1);
          flex-direction: column;
          gap: 2em;
@@ -141,6 +142,7 @@
       border-color: transparent;
       box-shadow: none;
    }
+
    to {
       border-color: var(--border-1);
       box-shadow: 10px 0px 25px hsla(0, 0%, 0%, 0.1);

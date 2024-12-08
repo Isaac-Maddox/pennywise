@@ -5,6 +5,10 @@
    border: 1px solid var(--border-1);
    min-width: 0;
 
+   @media (width < 728px) {
+      padding: 1.5em 1em;
+   }
+
    .card-header {
       display: grid;
       grid-template-columns: 1fr max-content;
