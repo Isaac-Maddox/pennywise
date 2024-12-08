@@ -6,11 +6,6 @@ import { toCurrencyString } from "@/utils/string";
 
 export async function getOverviewData(): Promise<ActionResponse<GetOverviewDataResponse>> {
    const user = await checkUserExists();
-   const numberFormat = Intl.NumberFormat('en-US', {
-      minimumFractionDigits: 2,
-      style: "currency",
-      currency: "USD"
-   });
 
    const [rawCategories, rawTransactions] = await prisma.$transaction([
       prisma.category.findMany({

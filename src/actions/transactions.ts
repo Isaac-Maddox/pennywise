@@ -42,7 +42,7 @@ export async function getTransactions<T extends GetTransactionsOptions>({
          success: true,
          data: transactions,
       };
-   } catch (error) {
+   } catch {
       return {
          success: false,
          message: `Internal Server Error`,

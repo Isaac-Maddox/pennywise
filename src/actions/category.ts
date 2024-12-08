@@ -1,11 +1,9 @@
 "use server";
 
 import { Category } from "@prisma/client";
-import { ActionResponse, CategoryWithTransactions } from "@/types";
+import { ActionResponse, CategoryWithTransactionAmounts } from "@/types";
 import prisma from "@/db";
-import { cookies } from "next/headers";
-import { checkUserExists, verifyToken } from "./auth";
-import { redirect } from "next/navigation";
+import { checkUserExists } from "./auth";
 import { getStartOfMonth } from "@/utils/date";
 
 export async function createCategory(data: Pick<Category, "name" | "budget">): Promise<ActionResponse<Category>> {
@@ -58,7 +56,7 @@ export async function deleteCategory(data: Pick<Category, "id">): Promise<Action
       }
    }
 
-   const user = await checkUserExists();
+   await checkUserExists();
 
    try {
       const category = await prisma.category.update({
@@ -139,7 +137,7 @@ export async function getCategoryData<T extends GetCategoryDataOptions | undefin
 
 type GetCategoryDataResponse<T extends GetCategoryDataOptions | undefined> = T extends GetCategoryDataOptions
    ? T["transactions"] extends true
-   ? CategoryWithTransactions[]
+   ? CategoryWithTransactionAmounts[]
    : Category[]
    : Category[];
 
