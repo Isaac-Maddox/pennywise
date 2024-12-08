@@ -20,7 +20,7 @@ export default async function DashboardPage({ user }: DashboardPageProps) {
       <div className="dashboard">
          <Header user={user} categories={categories} />
          <Suspense fallback={<></>}>
-            <Overview categories={categories} />
+            <Overview />
          </Suspense>
       </div>
    );
