@@ -18,11 +18,10 @@ export default function DividedList({ fallback, data, rows, total = {}, dashes }
                   })}
                </tr>
                {data.map((row, i) => {
-                  if (rows && rows - 1 === i && data.length > rows) {
-                     console.log("a");
-                     return null;
-                  }
-                  return rows && i > rows - 1 ? null : (
+                  // if (rows && rows - 1 === i && data.length > rows) {
+                  //    return null;
+                  // }
+                  return rows && (i > rows - 1 || (rows - 1 === i && data.length > rows)) ? null : (
                      <tr key={i}>
                         {headers.map((title, j) => {
                            return !row[title] && dashes ? <td key={j}>--</td> : <td key={j}>{row[title]}</td>;

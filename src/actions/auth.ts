@@ -143,9 +143,7 @@ export const verifyToken = async (token: string | undefined): Promise<SafeUser |
       return null;
    }
 
-   if (!jwt.verify(token, data.salt)) {
-      const cookieStore = await cookies();
-      cookieStore.delete("usrjwt");
+   try { jwt.verify(token, data.salt) } catch {
       return null;
    }
 
@@ -158,7 +156,6 @@ export async function checkUserExists(): Promise<SafeUser> {
    const user = await verifyToken(token);
 
    if (!user) {
-      // cookieStore.delete("usrjwt");
       redirect("/login");
    }
 
