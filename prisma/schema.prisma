@@ -5,52 +5,52 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+   provider  = "postgresql"
+   url       = env("DATABASE_URL")
+   directUrl = env("DIRECT_URL")
 }
 
 model User {
-  id           Int           @id @default(autoincrement())
-  email        String        @unique
-  firstName    String
-  lastName     String
-  password     String
-  salt         String
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
-  transactions Transaction[]
-  categories   Category[]
+   id           Int           @id @default(autoincrement())
+   email        String        @unique
+   firstName    String
+   lastName     String
+   password     String
+   salt         String
+   createdAt    DateTime      @default(now())
+   updatedAt    DateTime      @updatedAt
+   transactions Transaction[]
+   categories   Category[]
 }
 
 model Transaction {
-  id          Int      @id @default(autoincrement())
-  title       String
-  description String?
-  amount      Float
-  purchasedAt DateTime @default(now())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  userId      Int
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  categoryId  Int
-  category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+   id          Int      @id @default(autoincrement())
+   title       String
+   description String?
+   amount      Float
+   vendor      String?
+   purchasedAt DateTime @default(now())
+   createdAt   DateTime @default(now())
+   updatedAt   DateTime @updatedAt
+   userId      Int
+   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+   categoryId  Int
+   category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 }
 
 model Category {
-  id           Int           @id @default(autoincrement())
-  name         String
-  budget       Int
-  color        String        @default("blue")
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
-  userId       Int
-  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  transactions Transaction[]
-
-  @@unique([name, userId]) // Don't allow duplicate names per user
+   id           Int           @id @default(autoincrement())
+   name         String
+   budget       Int
+   color        String        @default("blue")
+   createdAt    DateTime      @default(now())
+   deletedAt DateTime?
+   updatedAt    DateTime      @updatedAt
+   userId       Int
+   user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+   transactions Transaction[]
 }

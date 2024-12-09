@@ -1,6 +1,6 @@
 "use server";
 
-import { ActionResponse } from "@/types";
+import { ActionResponse, SafeUser } from "@/types";
 import prisma from "@/db";
 import { User } from "@prisma/client";
 import { pbkdf2Sync, randomBytes } from "crypto";
@@ -126,12 +126,12 @@ export async function logout(): Promise<never> {
    redirect("/login");
 }
 
-export const verifyToken = async (token: string | undefined): Promise<Omit<User, "password" | "salt"> | null> => {
+export const verifyToken = async (token: string | undefined): Promise<SafeUser | null> => {
    if (!token) {
       return null;
    }
 
-   const userJWT = jwt.decode(token) as Omit<User, "password" | "salt"> | null;
+   const userJWT = jwt.decode(token) as SafeUser | null;
 
    if (!userJWT) {
       return null;
@@ -143,11 +143,21 @@ export const verifyToken = async (token: string | undefined): Promise<Omit<User,
       return null;
    }
 
-   if (!jwt.verify(token, data.salt)) {
-      const cookieStore = await cookies();
-      cookieStore.delete("usrjwt");
+   try { jwt.verify(token, data.salt) } catch {
       return null;
    }
 
    return userJWT;
 };
+
+export async function checkUserExists(): Promise<SafeUser> {
+   const cookieStore = await cookies();
+   const token = cookieStore.get("usrjwt")?.value;
+   const user = await verifyToken(token);
+
+   if (!user) {
+      redirect("/login");
+   }
+
+   return user;
+}

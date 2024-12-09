@@ -1,0 +1,11 @@
+.overview {
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   gap: 2em;
+   width: 100%;
+
+   @media (width < 1024px) {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr;
+   }
+}

@@ -1,11 +1,10 @@
 "use server";
 
 import { Category } from "@prisma/client";
-import { ActionResponse, CategoryWithTransactions } from "@/types";
+import { ActionResponse, CategoryWithTransactionAmounts } from "@/types";
 import prisma from "@/db";
-import { cookies } from "next/headers";
-import { verifyToken } from "./auth";
-import { redirect } from "next/navigation";
+import { checkUserExists } from "./auth";
+import { getStartOfMonth } from "@/utils/date";
 
 export async function createCategory(data: Pick<Category, "name" | "budget">): Promise<ActionResponse<Category>> {
    const missing = (["name", "budget"] as const).filter((field) => !data[field]);
@@ -17,14 +16,7 @@ export async function createCategory(data: Pick<Category, "name" | "budget">): P
       };
    }
 
-   const cookieStore = await cookies();
-   const token = cookieStore.get("usrjwt")?.value;
-   const user = await verifyToken(token);
-
-   if (!user) {
-      cookieStore.delete("usrjwt");
-      redirect("/login");
-   }
+   const user = await checkUserExists();
 
    try {
       const newCategory = await prisma.category.create({
@@ -50,20 +42,51 @@ export async function createCategory(data: Pick<Category, "name" | "budget">): P
    }
 }
 
-export async function getAllCategories(): Promise<ActionResponse<CategoryWithTransactions[]>> {
-   const cookieStore = await cookies();
-   const token = cookieStore.get("usrjwt")?.value;
-   const user = await verifyToken(token);
-
-   if (!user) {
-      cookieStore.delete("usrjwt");
-      redirect("/login");
+export async function deleteCategory(data: Pick<Category, "id">): Promise<ActionResponse<Category>> {
+   if (!data.id) {
+      return {
+         success: false,
+         message: "Missing id field"
+      }
    }
 
+   await checkUserExists();
+
    try {
-      const categories = await prisma.category.findMany({
+      const category = await prisma.category.update({
+         where: {
+            id: data.id
+         },
+         data: {
+            deletedAt: new Date()
+         }
+      });
+
+      return {
+         success: true,
+         data: category
+      }
+   } catch {
+      return {
+         success: false,
+         message: "Category could not be deleted"
+      }
+   }
+}
+
+export async function getCategoryData<T extends GetCategoryDataOptions | undefined>(
+   data?: T
+): Promise<ActionResponse<GetCategoryDataResponse<T>>> {
+   const user = await checkUserExists();
+
+   try {
+      const categories = (await prisma.category.findMany({
          where: {
             userId: user.id,
+            OR: [
+               { deletedAt: { gte: getStartOfMonth() } },
+               { deletedAt: null }
+            ]
          },
          orderBy: [
             {
@@ -75,14 +98,24 @@ export async function getAllCategories(): Promise<ActionResponse<CategoryWithTra
                id: "asc",
             },
          ],
-         include: {
-            transactions: {
-               select: {
-                  amount: true,
+         ...(data?.transactions
+            ? {
+               include: {
+                  transactions: {
+                     where: {
+                        purchasedAt: {
+                           gte: data?.range?.from,
+                           lte: data?.range?.to,
+                        },
+                     },
+                     select: {
+                        amount: true,
+                     },
+                  },
                },
-            },
-         },
-      });
+            }
+            : {}),
+      })) as GetCategoryDataResponse<T>;
 
       return {
          success: true,
@@ -94,4 +127,18 @@ export async function getAllCategories(): Promise<ActionResponse<CategoryWithTra
          message: `Internal Server Error`,
       };
    }
+}
+
+type GetCategoryDataResponse<T extends GetCategoryDataOptions | undefined> = T extends GetCategoryDataOptions
+   ? T["transactions"] extends true
+   ? CategoryWithTransactionAmounts[]
+   : Category[]
+   : Category[];
+
+interface GetCategoryDataOptions {
+   range?: {
+      from?: Date;
+      to?: Date;
+   };
+   transactions?: boolean;
 }

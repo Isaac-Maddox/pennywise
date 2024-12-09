@@ -1,5 +1,4 @@
-import { CategoryWithTransactions } from "@/types";
-import { User } from "@prisma/client";
+import { CategoryWithTransactionAmounts, SafeUser } from "@/types";
 import Link from "next/link";
 import BudgetChart from "../BudgetChart";
 
@@ -25,7 +24,7 @@ export default async function Header({ user, categories }: HeaderProps) {
       totalSpent += categoryTotal;
       totalBudget += category.budget;
 
-      if (categoryElements.length < 4) categoryElements.push(<BudgetChart key={category.id} name={category.name} amount={categoryTotal} multiplier={multiplier} budget={category.budget} color={category.color} />);
+      if (categoryElements.length < 4) categoryElements.push(<BudgetChart key={category.id} name={category.name} amount={categoryTotal} multiplier={currentDate > 7 ? multiplier : undefined} budget={category.budget} color={category.color} />);
    }
 
    const daily = totalSpent / Math.max(currentDate - 1, 1);
@@ -54,7 +53,7 @@ export default async function Header({ user, categories }: HeaderProps) {
          </div>
          {hasCategories ? (
             <div className="header-charts">
-               <BudgetChart size="large" name="Total budget" amount={totalSpent} multiplier={multiplier} budget={totalBudget} />
+               <BudgetChart size="large" name="Total budget" amount={totalSpent} multiplier={currentDate > 7 ? multiplier : undefined} budget={totalBudget} />
                {categoryElements}
             </div>
          ) : (
@@ -69,6 +68,6 @@ export default async function Header({ user, categories }: HeaderProps) {
 }
 
 interface HeaderProps {
-   user: User;
-   categories: CategoryWithTransactions[];
+   user: SafeUser;
+   categories: CategoryWithTransactionAmounts[];
 }

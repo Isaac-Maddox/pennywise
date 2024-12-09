@@ -4,13 +4,14 @@ import { User } from "@prisma/client";
 import { Suspense } from "react";
 import DashboardPage from "@/components/app/dashboard/DashboardPage";
 import Loading from "@/components/Loading";
+import { redirect } from "next/navigation";
 
 export default async function AppHome() {
    const cookieStore = await cookies();
    const token = cookieStore.get("usrjwt")?.value;
 
    if (!token) {
-      return <h1>Unauthorized</h1>;
+      return redirect("/login");
    }
 
    const user = jwt.decode(token) as User;

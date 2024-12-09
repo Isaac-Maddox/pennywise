@@ -21,7 +21,7 @@ export default function Nav() {
 
    return (
       <nav className={`app-nav${isOpen ? " drawer-open" : ""}`}>
-         <Link href="/app">
+         <Link href="/app" className="logo-link">
             <Logo_Lettermark />
          </Link>
          <div className="app-nav-drawer-wrapper">

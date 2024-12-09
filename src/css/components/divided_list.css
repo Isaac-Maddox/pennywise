@@ -1,0 +1,56 @@
+.table-wrapper {
+   max-width: 100%;
+   overflow: auto;
+}
+
+.divided-list {
+   table-layout: fixed;
+   /* required to keep table within container */
+   width: unset;
+   max-width: 100%;
+   text-align: left;
+   border-collapse: collapse;
+   /* allows the seperating lines */
+   border-spacing: 0;
+
+   >*:not(:last-child),
+   >*>tr:not(:last-child) td {
+      border-block-end: 1px solid var(--border-1);
+   }
+
+   td,
+   th {
+      padding: 0.5em 1.5em 0.5em 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 20ch;
+
+      &:last-child {
+         padding-inline-end: 0;
+      }
+   }
+
+   tr:not(.text-strong) {
+      td {
+         color: var(--body-text);
+      }
+
+      th {
+         color: var(--heading-text);
+      }
+   }
+
+   tr.text-strong {
+
+      td,
+      th {
+         color: var(--heading-text);
+      }
+   }
+
+   thead,
+   tfoot {
+      text-transform: capitalize;
+   }
+}
